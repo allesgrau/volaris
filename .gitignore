@@ -1,3 +1,21 @@
+# R
+*.Rcheck/
+*.tar.gz
+*.Rhistory
+*.RData
+.Rproj.user/
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# Quarto / docs
+_site/
+.quarto/
+
 # Prerequisites
 *.d
 

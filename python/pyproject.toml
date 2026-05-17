@@ -1,0 +1,12 @@
+[project]
+name = "volaris"
+description = "High-performance library for quantitative finance"
+version = "0.1.1"
+authors = [{ name="Barbara Gawlik", email="basia.m.gawlik@gmail.com" }]
+license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.21"]
+
+[build-system]
+requires = ["setuptools", "cython", "numpy"]
+build-backend = "setuptools.build_meta"
