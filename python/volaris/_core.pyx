@@ -1,10 +1,24 @@
 cdef extern from "black_scholes.h":
-    double c_bs_price  "bs_price" (double S, double K, double T, double r, double sigma, int is_call)
-    double c_bs_delta  "bs_delta" (double S, double K, double T, double r, double sigma, int is_call)
-    double c_bs_gamma  "bs_gamma" (double S, double K, double T, double r, double sigma)
-    double c_bs_vega   "bs_vega"  (double S, double K, double T, double r, double sigma)
-    double c_bs_theta  "bs_theta" (double S, double K, double T, double r, double sigma, int is_call)
-    double c_bs_rho    "bs_rho"   (double S, double K, double T, double r, double sigma, int is_call)
+    double  c_bs_price       "bs_price"          (double S, double K, double T, double r, double sigma, int is_call)
+    double  c_bs_delta       "bs_delta"          (double S, double K, double T, double r, double sigma, int is_call)
+    double  c_bs_gamma       "bs_gamma"          (double S, double K, double T, double r, double sigma)
+    double  c_bs_vega        "bs_vega"           (double S, double K, double T, double r, double sigma)
+    double  c_bs_theta       "bs_theta"          (double S, double K, double T, double r, double sigma, int is_call)
+    double  c_bs_rho         "bs_rho"            (double S, double K, double T, double r, double sigma, int is_call)
+
+cdef extern from "binomial_tree.h":
+    double  c_binomial_price "binomial_price"    (double S, double K, double T, double r, double q, double sigma, int N, int is_call, int is_american)
+
+cdef extern from "monte_carlo.h":
+    double  c_mc_price_european     "mc_price_european"     (double S, double K, double T, double r, double sigma, int N_paths, int is_call, double *std_err)
+    double  c_mc_price_asian        "mc_price_asian"        (double S, double K, double T, double r, double sigma, int N_paths, int N_steps, int is_call)
+    double  c_mc_price_barrier      "mc_price_barrier"      (double S, double K, double T, double r, double sigma, int N_paths, int N_steps, double B, int is_upper, int is_knockout, int is_call)
+
+cdef extern from "historical_vol.h":
+    double  c_vol_close_to_close    "vol_close_to_close"    (const double *returns, int n)
+    double  c_vol_parkinson         "vol_parkinson"         (const double *high, const double *low, int n)
+    double  c_vol_garman_klass      "vol_garman_klass"      (const double *high, const double *low, const double *open, const double *close, int n)
+    double  c_vol_yang_zhang        "vol_yang_zhang"        (const double *high, const double *low, const double *open, const double *close, int n)
 
 
 def bs_price(double S, double K, double T, double r, double sigma, int is_call):
@@ -199,3 +213,230 @@ def bs_rho(double S, double K, double T, double r, double sigma, int is_call):
     """
 
     return c_bs_rho(S, K, T, r, sigma, is_call)
+
+
+def binomial_price(double S, double K, double T, double r, double q, double sigma, int N, int is_call, int is_american):
+    """
+    Binomial tree options pricing
+
+    Parameters
+    ----------
+    S : float
+        current price of the underlying asset
+    K : float
+        strike price of the option
+    T : float
+        time to expiration of the option (in years)
+    r : float
+        risk-free interest rate (annualized)
+    q : float
+        continuous dividend yield of the underlying asset (annualized)
+    sigma : float
+        volatility of the underlying asset (annualized)
+    N : int
+        number of steps in the binomial tree
+    is_call : int
+        if 1, price a call option; if 0, price a put option
+    is_american : int
+        if 1, price an American option; if 0, price a European option
+    
+    Returns
+    -------
+    float
+        a number in the range (0, +inf) representing the price of the option
+
+    Examples
+    --------
+    >>> binomial_price(100, 100, 1, 0.05, 0.2, 200, 1, 0)
+    10.44059125985994
+    """
+
+    return c_binomial_price(S, K, T, r, q, sigma, N, is_call, is_american)
+
+
+def mc_price_european(double S, double K, double T, double r, double sigma, int N_paths, int is_call):
+    """
+    European options pricing via Monte Carlo simulation (Geometric Brownian Motion paths)
+
+    Parameters
+    ----------
+    S : float
+        current price of the underlying asset
+    K : float
+        strike price of the option
+    T : float
+        time to expiration of the option (in years)
+    r : float
+        risk-free interest rate (annualized)
+    sigma : float
+        volatility of the underlying asset (annualized)
+    N_paths : int
+        number of simulated paths
+    is_call : int
+        if 1, price a call option; if 0, price a put option
+    
+    Returns
+    -------
+    (float, float)
+        Monte Carlo estimate of the option price with standard error of that estimate
+    """
+
+    cdef double std_err = 0.0
+    cdef double price = c_mc_price_european(S, K, T, r, sigma, N_paths, is_call, &std_err)
+    return price, std_err
+
+
+def mc_price_asian(double S, double K, double T, double r, double sigma, int N_paths, int N_steps, int is_call):
+    """
+    Asian options pricing via Monte Carlo simulation (arithmetic average price)
+
+    Parameters
+    ----------
+    S : float
+        current price of the underlying asset
+    K : float
+        strike price of the option
+    T : float
+        time to expiration of the option (in years)
+    r : float
+        risk-free interest rate (annualized)
+    sigma : float
+        volatility of the underlying asset (annualized)
+    N_paths : int
+        number of simulated paths
+    N_steps : int
+        number of time steps per path
+    is_call : int
+        if 1, price a call option; if 0, price a put option
+    
+    Returns
+    -------
+    float
+        Monte Carlo estimate of the option price
+    """
+
+    return c_mc_price_asian(S, K, T, r, sigma, N_paths, N_steps, is_call)
+
+
+def mc_price_barrier(double S, double K, double T, double r, double sigma, int N_paths, int N_steps, double B, int is_upper, int is_knockout, int is_call):
+    """
+    Knock-in / knock-out options pricing via Monte Carlo simulation (Geometric Brownian Motion paths)
+
+    Parameters
+    ----------
+    S : float
+        current price of the underlying asset
+    K : float
+        strike price of the option
+    T : float
+        time to expiration of the option (in years)
+    r : float
+        risk-free interest rate (annualized)
+    sigma : float
+        volatility of the underlying asset (annualized)
+    N_paths : int
+        number of simulated paths
+    N_steps : int
+        number of time steps per path
+    B : float
+        barrier level
+    is_upper : int
+        if 1, active when S >= B; if 0, active when S <= B
+    is_knockout : int
+        if 1, barrier deactivates option; if 0, barrier activates option
+    is_call : int
+        if 1, price a call option; if 0, price a put option
+    
+    Returns
+    -------
+    float
+        Monte Carlo estimate of the option price
+    """
+
+    return c_mc_price_barrier(S, K, T, r, sigma, N_paths, N_steps, B, is_upper, is_knockout, is_call)
+
+
+def hist_vol_close_to_close(double[::1] returns not None):
+    """
+    Close-to-close historical volatility (annualised). Standard deviation estimator.
+
+    Parameters
+    ----------
+    returns : np.ndarray of float64
+        log-return series
+
+    Returns
+    -------
+    float
+        annualised volatility
+    """
+
+    return c_vol_close_to_close(&returns[0], len(returns))
+
+
+def hist_vol_parkinson(double[::1] high not None, double[::1] low not None):
+    """
+    Parkinson historical volatility (annualised).
+
+    Parameters
+    ----------
+    high : np.ndarray of float64
+        daily high prices
+    low  : np.ndarray of float64
+        daily low prices
+
+    Returns
+    -------
+    float
+        annualised volatility
+    """
+
+    return c_vol_parkinson(&high[0], &low[0], len(high))
+
+
+def hist_vol_garman_klass(double[::1] high not None, double[::1] low not None, double[::1] open not None, double[::1] close not None):
+    """
+    Garman-Klass historical volatility (annualised).
+
+    Parameters
+    ----------
+    open : np.ndarray of float64
+        daily open prices
+    close : np.ndarray of float64
+        daily close prices
+    low : np.ndarray of float64
+        daily low prices
+    high : np.ndarray of float64
+        daily high prices
+
+    Returns
+    -------
+    float
+        annualised volatility
+    """
+
+    return c_vol_garman_klass(&high[0], &low[0], &open[0], &close[0], len(high))
+
+
+def hist_vol_yang_zhang(double[::1] high not None, double[::1] low not None, double[::1] open not None, double[::1] close not None):
+    """
+    Yang-Zhang historical volatility (annualised). Most efficient estimator.
+
+    Parameters
+    ----------
+    open : np.ndarray of float64
+        daily open prices
+    close : np.ndarray of float64
+        daily close prices
+    low : np.ndarray of float64
+        daily low prices
+    high : np.ndarray of float64
+        daily high prices
+
+    Returns
+    -------
+    float
+        annualised volatility
+    """
+
+    return c_vol_yang_zhang(&high[0], &low[0], &open[0], &close[0], len(high))

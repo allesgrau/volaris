@@ -1,8 +1,4 @@
-PKG_CPPFLAGS = -I"../../../src/pricing"
-PKG_CFLAGS = -O3 -march=native
-PKG_LIBS = -lm
-
-OBJECTS = volaris_r.o black_scholes.o
-
-black_scholes.o: ../../../src/pricing/black_scholes.c
-    $(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) -c -o $@ $<
+PKG_CPPFLAGS    = -I"../../../src/pricing" -I"../../../src/volatility"
+PKG_CFLAGS      = -O3
+PKG_CXXFLAGS    = -O3 -std=c++14
+PKG_LIBS        = -lm
