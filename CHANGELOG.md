@@ -22,8 +22,11 @@ All notable changes to this project will be documented in this file.
 ### Added
 - C/C++ code and Python/R bindings for `pricing/binomial_tree`, `pricing/heston`, `pricing/monte_carlo`, `volatility/garch`, `volatility/historical_vol`.
 
-## [0.1.3] - 2026-05-31
+## [0.1.3] – 2026-05-31
 
 ### Added
 - Finished full implementation of `pricing/binomial_tree`, `pricing/heston`, `pricing/monte_carlo`, `volatility/garch`, `volatility/historical_vol`: unit tests and compilation.
-- Full implementation of `volatility/implied_vol`, `simulation/gbm`.
+- Full implementation of `volatility/implied_vol`, `simulation/gbm`, as well as `simulation/jump_diffusion` and `simulation/mcmc`.
+
+### Modified
+- Changed plans for the package: dropped the `risk/` part.

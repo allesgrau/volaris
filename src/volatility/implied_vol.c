@@ -31,7 +31,7 @@ double implied_vol(double market_price, double S, double K, double T, double r, 
         if (f < 0.0)
             low = sigma;
         else
-            high - sigma;
+            high = sigma;
 
         double sigma_new = (vega > 1e-10) ? sigma - f / vega : 0.5 * (low + high);
 

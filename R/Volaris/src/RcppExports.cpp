@@ -84,6 +84,8 @@ RcppExport SEXP r_implied_vol(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP r_mc_price_asian(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP r_mc_price_barrier(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP r_mc_price_european(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP r_merton_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP r_mh_sampler_gbm(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP r_vol_close_to_close(SEXP, SEXP);
 RcppExport SEXP r_vol_garman_klass(SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP r_vol_parkinson(SEXP, SEXP, SEXP);
@@ -107,6 +109,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"r_mc_price_asian",       (DL_FUNC) &r_mc_price_asian,        8},
     {"r_mc_price_barrier",     (DL_FUNC) &r_mc_price_barrier,     11},
     {"r_mc_price_european",    (DL_FUNC) &r_mc_price_european,     7},
+    {"r_merton_paths",         (DL_FUNC) &r_merton_paths,          9},
+    {"r_mh_sampler_gbm",       (DL_FUNC) &r_mh_sampler_gbm,        8},
     {"r_vol_close_to_close",   (DL_FUNC) &r_vol_close_to_close,    2},
     {"r_vol_garman_klass",     (DL_FUNC) &r_vol_garman_klass,      5},
     {"r_vol_parkinson",        (DL_FUNC) &r_vol_parkinson,         3},

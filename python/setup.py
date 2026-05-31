@@ -18,6 +18,8 @@ ext_core = Extension(
       "../src/volatility/historical_vol.c",
       "../src/volatility/implied_vol.c",
       "../src/simulation/gbm.c",
+      "../src/simulation/mcmc.c",
+      "../src/simulation/jump_diffusion.c",
     ],
     include_dirs=[
       "../src/pricing",

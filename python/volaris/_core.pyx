@@ -27,6 +27,12 @@ cdef extern from "gbm.h":
     double  c_gbm_paths             "gbm_paths"             (double S0, double mu, double sigma, double T, int N_steps, int N_paths, double *out)
     double  c_gbm_paths_antithetic  "gbm_paths_antithetic"  (double S0, double mu, double sigma, double T, int N_steps, int N_paths, double *out)
 
+cdef extern from "mcmc.h":
+    double  c_mh_sampler_gbm "mh_sampler_gbm"   (const double *returns, int n, double dt, int n_iter, int n_burning, double mu_init, double sigma_init, double proposal_mu, double proposal_sigma, double *out)
+
+cdef extern from "jump_diffusion.h":
+    void    c_merton_paths "merton_paths"  (double S0, double mu, double sigma, double lambda_, double mu_j, double sigma_j, double T, int N_steps, int N_paths, double *out)
+
 
 def bs_price(double S, double K, double T, double r, double sigma, int is_call):
     """
@@ -545,4 +551,79 @@ def gbm_paths_antithetic(double S0, double mu, double sigma, double T, int N_ste
     out = np.empty((N_paths, N_steps), dtype=np.float64)
     cdef double[:, ::1] buf = out
     c_gbm_paths(S0, mu, sigma, T, N_steps, N_paths, &buf[0, 0])
+    return out
+
+
+def mh_sampler_gbm(double[::1] returns not None, int n_iter, int n_burning, double proposal_mu=0.005, double proposal_sigma=0.005, double mu_init=0.0, double sigma_init=0.2, double dt=1.0/252.0):
+    """
+    Calibrate GBM parameters (mu, sigma) via Metropolis-Hastings MCMC.
+
+    Parameters
+    ----------
+    returns : np.ndarray of float64
+        log-return series
+    n_iter : int
+        total number of MCMC iterations
+    n_burning : int
+        number of burn-in iterations to discard
+    proposal_mu : float
+        random walk step size for mu
+    proposal_sigma : float
+        random walk step size for sigma
+    mu_init : float
+        initial value of mu
+    sigma_init : float
+        initial value of sigma
+    dt : float
+        time step between observations (default 1/252 for daily data)
+
+    Returns
+    -------
+    np.ndarray, shape (n_iter - n_burnin, 2)
+        posterior samples; columns are [mu, sigma]
+    """
+
+    import numpy as np
+    n_samples = n_iter - n_burning
+    out = np.empty((n_samples, 2), dtype=np.float64)
+    cdef double[:, ::1] buf = out
+    c_mh_sampler_gbm(&returns[0], len(returns), dt, n_iter, n_burning, mu_init, sigma_init, proposal_mu, proposal_sigma, &buf[0, 0])
+    return out
+
+
+def merton_paths(double S0, double mu, double sigma, double lambda_, double mu_j, double sigma_j, double T, int N_steps, int N_paths):
+    """
+    Simulate Merton jump-diffusion paths (GBM + compound Poisson jumps).
+
+    Parameters
+    ----------
+    S0 : float
+        initial asset price
+    mu : float
+        drift (annualized)
+    sigma : float
+        diffusion volatility (annualized)
+    lambda_ : float
+        jump intensity (expected number of jumps per year)
+    mu_j : float
+        mean log-jump size
+    sigma_j : float
+        std of log-jump size
+    T : float
+        time horizon (in years)
+    N_steps : int
+        number of time steps
+    N_paths : int
+        number of simulated paths
+
+    Returns
+    -------
+    np.ndarray, shape (N_paths, N_steps)
+        simulated asset prices; out[i, j] = price of path i at time step j+1
+    """
+
+    import numpy as np
+    out = np.empty((N_paths, N_steps), dtype=np.float64)
+    cdef double[:, ::1] buf = out
+    c_merton_paths(S0, mu, sigma, lambda_, mu_j, sigma_j, T, N_steps, N_paths, &buf[0, 0])
     return out

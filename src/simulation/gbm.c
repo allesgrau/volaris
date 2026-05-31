@@ -14,7 +14,7 @@ void gbm_paths(double S0, double mu, double sigma, double T, int N_steps, int N_
     int tmax = omp_get_max_threads();
     unsigned long long *seeds = (unsigned long long *)malloc(tmax * sizeof(unsigned long long));
     for (int t = 0; t < tmax; ++t)
-        seeds[t] = (unsigned long long)(t + 1) * 2654435761ULL;
+        seeds[t] = (unsigned long long)(t + 1) * 1234567891ULL;
 
     #pragma omp parallel for
     for (int i = 0; i < N_paths; ++i) 
@@ -40,7 +40,7 @@ void gbm_paths_antithetic(double S0, double mu, double sigma, double T, int N_st
     int tmax = omp_get_max_threads();
     unsigned long long *seeds = (unsigned long long *)malloc(tmax * sizeof(unsigned long long));
     for (int t = 0; t < tmax; ++t)
-        seeds[t] = (unsigned long long)(t + 1) * 2654435761ULL;
+        seeds[t] = (unsigned long long)(t + 1) * 1234567891ULL;
 
     #pragma omp parallel for
     for (int i = 0; i < half; ++i) 

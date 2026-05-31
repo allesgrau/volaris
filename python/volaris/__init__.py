@@ -5,6 +5,8 @@ from ._core import (
     hist_vol_close_to_close, hist_vol_parkinson, hist_vol_garman_klass, hist_vol_yang_zhang,
     implied_vol,
     gbm_paths, gbm_paths_antithetic,
+    mh_sampler_gbm,
+    merton_paths,
 )
 
 from ._heston_garch import (

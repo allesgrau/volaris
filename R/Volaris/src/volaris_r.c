@@ -8,6 +8,8 @@
 #include "../../../src/volatility/historical_vol.c"
 #include "../../../src/volatility/implied_vol.c"
 #include "../../../src/simulation/gbm.c"
+#include "../../../src/simulation/mcmc.c"
+#include "../../../src/simulation/jump_diffusion.c"
 
 
 SEXP r_bs_price(SEXP S, SEXP K, SEXP T, SEXP r, SEXP sigma, SEXP is_call)
@@ -143,9 +145,11 @@ SEXP r_mc_price_barrier(SEXP S, SEXP K, SEXP T, SEXP r, SEXP sigma, SEXP N_paths
 SEXP r_vol_close_to_close(SEXP returns, SEXP n)
 {
     if (!Rf_isReal(returns) || !Rf_isInteger(n))
+    {
         Rf_error("Type error: returns must be numeric, n must be integer.");
+    }
     
-        return Rf_ScalarReal(vol_close_to_close(REAL(returns), INTEGER(n)[0]));
+    return Rf_ScalarReal(vol_close_to_close(REAL(returns), INTEGER(n)[0]));
 }
 
 
@@ -161,9 +165,11 @@ SEXP r_vol_parkinson(SEXP high, SEXP low, SEXP n)
 SEXP r_vol_garman_klass(SEXP open, SEXP high, SEXP low, SEXP close, SEXP n)
 {
     if (!Rf_isReal(open) || !Rf_isReal(high) || !Rf_isReal(low) || !Rf_isReal(close) || !Rf_isInteger(n))
+    {
         Rf_error("Type error: open, high, low, close must be numeric, n must be integer.");
-    
-        return Rf_ScalarReal(vol_garman_klass(REAL(high), REAL(low), REAL(open), REAL(close), INTEGER(n)[0]));
+    }
+        
+    return Rf_ScalarReal(vol_garman_klass(REAL(high), REAL(low), REAL(open), REAL(close), INTEGER(n)[0]));
 }
 
 
@@ -224,6 +230,55 @@ SEXP r_gbm_paths_antithetic(SEXP S0, SEXP mu, SEXP sigma, SEXP T, SEXP N_steps, 
     for (int i = 0; i < n_paths; ++i)
         for (int j = 0; j < n_steps; ++j)
             REAL(out)[j + n_steps * i] = buf[i * n_steps + j];
+    free(buf);
+    return out;
+}
+
+
+SEXP r_mh_sampler_gbm(SEXP returns, SEXP n_iter, SEXP n_burning, SEXP proposal_mu, SEXP proposal_sigma, SEXP mu_init, SEXP sigma_init, SEXP dt)
+{
+    if (!Rf_isReal(returns) || !Rf_isInteger(n_iter) || !Rf_isInteger(n_burning) || !Rf_isReal(proposal_mu) || !Rf_isReal(proposal_sigma) || !Rf_isReal(mu_init) || 
+        !Rf_isReal(sigma_init) || !Rf_isReal(dt))
+    {
+        Rf_error("Type error: returns, proposal_mu, proposal_sigma, mu_init, sigma_init, dt must be numeric; n_iter, n_burning must be integer.");
+    }
+
+    int n = Rf_length(returns);
+    int n_samp = INTEGER(n_iter)[0] - INTEGER(n_burning)[0];
+
+    double *buf  = (double *)malloc(n_samp * 2 * sizeof(double));
+    mh_sampler_gbm(REAL(returns), n, REAL(dt)[0], INTEGER(n_iter)[0], INTEGER(n_burning)[0], REAL(mu_init)[0], REAL(sigma_init)[0], 
+                   REAL(proposal_mu)[0], REAL(proposal_sigma)[0], buf);
+
+    SEXP out = Rf_allocMatrix(REALSXP, n_samp, 2);
+    for (int i = 0; i < n_samp; ++i) {
+        REAL(out)[i] = buf[i * 2];
+        REAL(out)[i + n_samp] = buf[i * 2 + 1];
+    }
+    free(buf);
+    return out;
+}
+
+
+SEXP r_merton_paths(SEXP S0, SEXP mu, SEXP sigma, SEXP lambda, SEXP mu_j, SEXP sigma_j, SEXP T, SEXP N_steps, SEXP N_paths)
+{
+    if (!Rf_isReal(S0) || !Rf_isReal(mu) || !Rf_isReal(sigma) || !Rf_isReal(lambda) || !Rf_isReal(mu_j) || !Rf_isReal(sigma_j) || !Rf_isReal(T) || 
+        !Rf_isInteger(N_steps) || !Rf_isInteger(N_paths))
+    {
+        Rf_error("Type error: S0, mu, sigma, lambda, mu_j, sigma_j, T must be numeric; N_steps, N_paths must be integer.");
+    }
+          
+    int n_steps = INTEGER(N_steps)[0];
+    int n_paths = INTEGER(N_paths)[0];
+
+    double *buf = (double *)malloc(n_paths * n_steps * sizeof(double));
+    merton_paths(REAL(S0)[0], REAL(mu)[0], REAL(sigma)[0], REAL(lambda)[0], REAL(mu_j)[0], REAL(sigma_j)[0], REAL(T)[0], n_steps, n_paths, buf);
+
+    SEXP out = Rf_allocMatrix(REALSXP, n_steps, n_paths);
+    for (int i = 0; i < n_paths; ++i)
+        for (int j = 0; j < n_steps; ++j)
+            REAL(out)[j + n_steps * i] = buf[i * n_steps + j];
+    
     free(buf);
     return out;
 }
