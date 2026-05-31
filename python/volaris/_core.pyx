@@ -7,7 +7,7 @@ cdef extern from "black_scholes.h":
     double  c_bs_rho         "bs_rho"            (double S, double K, double T, double r, double sigma, int is_call)
 
 cdef extern from "binomial_tree.h":
-    double  c_binomial_price "binomial_price"    (double S, double K, double T, double r, double q, double sigma, int N, int is_call, int is_american)
+    double  c_binomial_price "binomial_price"   (double S, double K, double T, double r, double q, double sigma, int N, int is_call, int is_american)
 
 cdef extern from "monte_carlo.h":
     double  c_mc_price_european     "mc_price_european"     (double S, double K, double T, double r, double sigma, int N_paths, int is_call, double *std_err)
@@ -19,6 +19,13 @@ cdef extern from "historical_vol.h":
     double  c_vol_parkinson         "vol_parkinson"         (const double *high, const double *low, int n)
     double  c_vol_garman_klass      "vol_garman_klass"      (const double *high, const double *low, const double *open, const double *close, int n)
     double  c_vol_yang_zhang        "vol_yang_zhang"        (const double *high, const double *low, const double *open, const double *close, int n)
+
+cdef extern from "implied_vol.h":
+    double  c_implied_vol "implied_vol" (double market_price, double S, double K, double T, double r, int is_call)
+
+cdef extern from "gbm.h":
+    double  c_gbm_paths             "gbm_paths"             (double S0, double mu, double sigma, double T, int N_steps, int N_paths, double *out)
+    double  c_gbm_paths_antithetic  "gbm_paths_antithetic"  (double S0, double mu, double sigma, double T, int N_steps, int N_paths, double *out)
 
 
 def bs_price(double S, double K, double T, double r, double sigma, int is_call):
@@ -440,3 +447,102 @@ def hist_vol_yang_zhang(double[::1] high not None, double[::1] low not None, dou
     """
 
     return c_vol_yang_zhang(&high[0], &low[0], &open[0], &close[0], len(high))
+
+
+def implied_vol(double market_price, double S, double K, double T, double r, int is_call):
+    """
+    Implied volatility via Newton-Raphson with bisection fallback (Black-Scholes inversion)
+
+    Parameters
+    ----------
+    market price : float
+        observed market price of the option
+    S : float
+        current price of the underlying asset
+    K : float
+        strike price of the option
+    T : float
+        time to expiration of the option (in years)
+    r : float
+        risk-free interest rate (annualized)
+    is_call : int
+        if 1, the option is a call; if 0, the option is a put
+    
+    Returns
+    -------
+    float
+        implied volatility (annualized)
+
+    Examples
+    --------
+    >>> implied_vol(10.45, 100, 100, 1, 0.05, 1)
+    0.19998444801094356
+    """
+
+    return c_implied_vol(market_price, S, K, T, r, is_call)
+
+
+def gbm_paths(double S0, double mu, double sigma, double T, int N_steps, int N_paths):
+    """
+    Simulate Geometric Brownian Motion paths.
+
+    Parameters
+    ----------
+    S0 : float
+        initial asset price
+    mu : float
+        drift (annualized)
+    sigma : float
+        volatility (annualized)
+    T : float
+        time horizon (in years)
+    N_steps : int
+        number of time steps
+    N_paths : int
+        number of simulated paths
+
+    Returns
+    -------
+    np.ndarray, shape (N_paths, N_steps)
+        simulated asset prices; paths[i, j] = S at step j+1 for path i
+    """
+
+    import numpy as np
+    out = np.empty((N_paths, N_steps), dtype=np.float64)
+    cdef double[:, ::1] buf = out
+    c_gbm_paths(S0, mu, sigma, T, N_steps, N_paths, &buf[0, 0])
+    return out
+
+
+def gbm_paths_antithetic(double S0, double mu, double sigma, double T, int N_steps, int N_paths):
+    """
+    Simulate Geometric Brownian Motion paths using antithetic variates for variance reduction.
+
+    Parameters
+    ----------
+    S0 : float
+        initial asset price
+    mu : float
+        drift (annualized)
+    sigma : float
+        volatility (annualized)
+    T : float
+        time horizon (in years)
+    N_steps : int
+        number of time steps
+    N_paths : int
+        number of simulated paths
+
+    Returns
+    -------
+    np.ndarray, shape (N_paths, N_steps)
+        simulated asset prices; paths[i, j] = S at step j+1 for path i
+    """
+
+    if (N_paths % 2 != 0):
+        raise ValueError("N_paths must be even for antithetic variates")
+    import numpy as np
+    out = np.empty((N_paths, N_steps), dtype=np.float64)
+    cdef double[:, ::1] buf = out
+    c_gbm_paths(S0, mu, sigma, T, N_steps, N_paths, &buf[0, 0])
+    return out

@@ -6,7 +6,7 @@
 \alias{Volaris-package}
 \title{Volaris: High-performance library for quantitative finance}
 \description{
-Provides time-efficient pricing of derivatives, volatility estimation, a stochastic simulation engine and calculation of risk metrics via a compiled C core.
+Provides time-efficient pricing of derivatives, volatility estimation, a stochastic simulation engine and calculation of risk metrics via a compiled C/C++ core.
 }
 \author{
 \strong{Maintainer}: Barbara Gawlik \email{basia.m.gawlik@gmail.com}

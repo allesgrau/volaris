@@ -1,3 +1,5 @@
+https://medium.com/@aaron_delarosa/implementing-heston-model-in-c-b7b7ed19943c
+
 ## Komendy
 
 * Przebudowa, rekompilacja i testy dla Pythona
@@ -41,7 +43,9 @@ python -c "from volaris._core import binomial_price; print(binomial_price(100, 1
 5. `python/volaris/_heston_garch.pyx`: dodaj `cdef extern from "<nazwa>.hpp" namespace "volaris"` i funkcję Python
 6. `python/setup.py`: dodaj `../src/<moduł>/<nazwa>.cpp` do `sources` w `ext_heston_garch`
 
-## Na koniec
+## Na koniec (aka sprzątanie pieprznika)
 
 * Sprawdź, czy na wejściu sprawdzasz wszystkie warunki konieczne, które muszą spełniać dane (np. N reprezentujące liczbę kroków musi być >= 0).
-* Sprawdź, czy każdy wzór serio jest dobrze zaimplementowany.
+* Sprawdź jeszcze raz, czy każdy wzór serio jest dobrze zaimplementowany.
+* Pozamieniać int i=0 na size_t i=0 tam gdzie mi się powaliło.
+* Ujednolicić formatowanie.

@@ -1,4 +1,4 @@
 PKG_CPPFLAGS    = -I"../../../src/pricing" -I"../../../src/volatility"
-PKG_CFLAGS      = -O3
+PKG_CFLAGS      = -O3 -fopenmp
 PKG_CXXFLAGS    = -O3 -std=c++14
-PKG_LIBS        = -lm
+PKG_LIBS        = -lm -fopenmp

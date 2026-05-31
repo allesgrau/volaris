@@ -1,10 +1,13 @@
 #define R_NO_REMAP
 #include <R.h>
 #include <Rinternals.h>
+#include "../../../src/utils/lcg.c"
 #include "../../../src/pricing/black_scholes.c"
 #include "../../../src/pricing/binomial_tree.c"
 #include "../../../src/pricing/monte_carlo.c"
 #include "../../../src/volatility/historical_vol.c"
+#include "../../../src/volatility/implied_vol.c"
+#include "../../../src/simulation/gbm.c"
 
 
 SEXP r_bs_price(SEXP S, SEXP K, SEXP T, SEXP r, SEXP sigma, SEXP is_call)
@@ -170,4 +173,57 @@ SEXP r_vol_yang_zhang(SEXP open, SEXP high, SEXP low, SEXP close, SEXP n)
         Rf_error("Type error: open, high, low, close must be numeric, n must be integer.");
     
     return Rf_ScalarReal(vol_yang_zhang(REAL(high), REAL(low), REAL(open), REAL(close), INTEGER(n)[0]));
+}
+
+SEXP r_implied_vol(SEXP market_price, SEXP S, SEXP K, SEXP T, SEXP r, SEXP is_call)
+{
+    if (!Rf_isReal(market_price) || !Rf_isReal(S) || !Rf_isReal(K) || !Rf_isReal(T) || !Rf_isReal(r) || !Rf_isInteger(is_call) || 
+       (INTEGER(is_call)[0] != 0 && INTEGER(is_call)[0] != 1))
+    {
+        Rf_error("Type error: market_price, S, K, T, r must be numeric; is_call must be integer (0 or 1).");
+    }
+
+    return Rf_ScalarReal(implied_vol(REAL(market_price)[0], REAL(S)[0], REAL(K)[0], REAL(T)[0], REAL(r)[0], INTEGER(is_call)[0]));
+}
+
+
+SEXP r_gbm_paths(SEXP S0, SEXP mu, SEXP sigma, SEXP T, SEXP N_steps, SEXP N_paths)
+{
+    if (!Rf_isReal(S0) || !Rf_isReal(mu) || !Rf_isReal(sigma) || !Rf_isReal(T) || !Rf_isInteger(N_steps) || !Rf_isInteger(N_paths))
+        Rf_error("Type error: S0, mu, sigma, T must be numeric; N_steps, N_paths must be integer.");
+
+    int n_steps = INTEGER(N_steps)[0];
+    int n_paths = INTEGER(N_paths)[0];
+
+    double *buf = (double *)malloc(n_paths * n_steps * sizeof(double));
+    gbm_paths(REAL(S0)[0], REAL(mu)[0], REAL(sigma)[0], REAL(T)[0], n_steps, n_paths, buf);
+
+    SEXP out = Rf_allocMatrix(REALSXP, n_steps, n_paths);
+    for (int i = 0; i < n_paths; ++i)
+        for (int j = 0; j < n_steps; ++j)
+            REAL(out)[j + n_steps * i] = buf[i * n_steps + j];
+    free(buf);
+    return out;
+}
+
+
+SEXP r_gbm_paths_antithetic(SEXP S0, SEXP mu, SEXP sigma, SEXP T, SEXP N_steps, SEXP N_paths)
+{
+    if (!Rf_isReal(S0) || !Rf_isReal(mu) || !Rf_isReal(sigma) || !Rf_isReal(T) || !Rf_isInteger(N_steps) || !Rf_isInteger(N_paths))
+        Rf_error("Type error: S0, mu, sigma, T must be numeric; N_steps, N_paths must be integer.");
+
+    int n_steps = INTEGER(N_steps)[0];
+    int n_paths = INTEGER(N_paths)[0];
+    if (n_paths % 2 != 0)
+        Rf_error("N_paths must be even for antithetic variates.");
+
+    double *buf = (double *)malloc(n_paths * n_steps * sizeof(double));
+    gbm_paths_antithetic(REAL(S0)[0], REAL(mu)[0], REAL(sigma)[0], REAL(T)[0], n_steps, n_paths, buf);
+
+    SEXP out = Rf_allocMatrix(REALSXP, n_steps, n_paths);
+    for (int i = 0; i < n_paths; ++i)
+        for (int j = 0; j < n_steps; ++j)
+            REAL(out)[j + n_steps * i] = buf[i * n_steps + j];
+    free(buf);
+    return out;
 }

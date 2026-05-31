@@ -11,13 +11,18 @@ ext_core = Extension(
     name="volaris._core",
     sources=[
       "volaris/_core.pyx",
+      "../src/utils/lcg.c",
       "../src/pricing/black_scholes.c",
       "../src/pricing/binomial_tree.c",
       "../src/pricing/monte_carlo.c",
       "../src/volatility/historical_vol.c",
+      "../src/volatility/implied_vol.c",
+      "../src/simulation/gbm.c",
     ],
     include_dirs=[
       "../src/pricing",
+      "../src/volatility",
+      "../src/simulation",
       np.get_include(),
     ],
     extra_compile_args=extra_c_comp_args,

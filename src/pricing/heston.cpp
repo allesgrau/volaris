@@ -21,23 +21,14 @@ namespace volaris {
         double b_j = (j == 1) ? (kappa - rho * xi) : kappa;
         double u_j = (j == 1) ? 0.5 : -0.5;
 
-        // d = sqrt((rho*xi*iu - b_j)^2 - xi^2*(2*u_j*iu - u^2))
-        Cx d = std::sqrt((rho * xi * iu - b_j) * (rho * xi * iu - b_j) - xi * xi * (2.0 * u_j * iu - u * u));
-
-        // g = (b_j - rho*xi*iu + d) / (b_j - rho*xi*iu - d)
-        Cx g = (b_j - rho * xi * iu + d) / (b_j - rho * xi * iu - d);
-
-        // exp(-d*tau)
+        Cx beta = b_j - rho * xi * iu;
+        Cx d = std::sqrt(beta * beta - xi * xi * (2.0 * u_j * iu - u * u));
+        Cx g = (beta - d) / (beta + d);
         Cx e_mdt = std::exp(-d * tau);
-
-        // A = r*iu*tau + (kappa*theta/xi^2)*[(g_num)*tau - 2*log((1-g*e^{-dtau})/(1-g))]
         Cx log_val = std::log((1.0 - g * e_mdt) / (1.0 - g));
-        Cx A = r * iu * tau + (kappa * theta / (xi * xi)) * ((b_j - rho * xi * iu + d) * tau - 2.0 * log_val);
-
-        // B = (g_num / xi^2) * (1 - e^{-dtau}) / (1 - g*e^{-dtau})
-        Cx B = ((b_j - rho * xi * iu + d) / (xi * xi)) * (1.0 - e_mdt) / (1.0 - g * e_mdt);
+        Cx A = r * iu * tau + (kappa * theta / (xi * xi)) * ((beta - d) * tau - 2.0 * log_val);
+        Cx B = ((beta - d) / (xi * xi)) * (1.0 - e_mdt) / (1.0 - g * e_mdt);
         
-        // phi = exp(A + B*v0 + iu*ln_S)
         return std::exp(A + B * v0 + iu * ln_S);
     }
 
