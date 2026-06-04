@@ -4,9 +4,9 @@ from setuptools import setup, Extension
 from Cython.Build import cythonize
 import numpy as np
 
-extra_cpp_comp_args = [] if sys.platform == "win32" else ["-std=c++14", "-O3", "-fopenmp"]
-extra_c_comp_args = [] if sys.platform == "win32" else ["-std=c11", "-O3", "-fopenmp"]
-extra_openmp_arg = [] if sys.platform == "win32" else ["-fopenmp"]
+extra_cpp_comp_args = ["/openmp"] if sys.platform == "win32" else ["-std=c++14", "-O3", "-fopenmp"]
+extra_c_comp_args = ["/openmp"] if sys.platform == "win32" else ["-std=c11", "-O3", "-fopenmp"]
+extra_openmp_arg = ["/openmp"] if sys.platform == "win32" else ["-fopenmp"]
 
 
 conda_prefix = os.environ.get("CONDA_PREFIX", "") or sys.prefix
