@@ -31,11 +31,12 @@ All notable changes to this project will be documented in this file.
 ### Modified
 - Changed plans for the package: dropped the `risk/` part.
 
-## [0.2.1] – 2026-06-04
+## [0.2.0] – 2026-06-04
 
 ### Added
 
 - Full implementation of `numerical/rootfind` and `numerical/integrate`, thus making the source C/C++ code for the package complete.
+- Proper handling of the additional GNU GSL library used in source code.
 
 ### Modified
 
