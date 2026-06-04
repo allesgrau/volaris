@@ -22,8 +22,9 @@ double mc_price_european(double S, double K, double T, double r, double sigma, i
     double drift = (r - 0.5 * sigma * sigma) * T;
     double vol = sigma * sqrt(T);
 
+    int i;
     #pragma omp parallel for reduction(+:sum, sum_sq)
-    for (int i = 0; i < N_paths; ++i) {
+    for (i = 0; i < N_paths; ++i) {
         int tid = omp_get_thread_num();
         double z = lcg_normal(&seeds[tid]);
         double S_T = S * exp(drift + vol * z);
@@ -57,8 +58,9 @@ double mc_price_asian(double S, double K, double T, double r, double sigma, int 
     double drift = (r - 0.5 * sigma * sigma) * dt;
     double vol = sigma * sqrt(dt);
 
+    int i;
     #pragma omp parallel for reduction(+:sum)
-    for (int i = 0; i < N_paths; ++i) {
+    for (i = 0; i < N_paths; ++i) {
         int tid = omp_get_thread_num();
         double S_t = S;
         double path_sum = 0.0;
@@ -91,8 +93,9 @@ double mc_price_barrier(double S, double K, double T, double r, double sigma, in
     double drift = (r - 0.5 * sigma * sigma) * dt;
     double vol = sigma * sqrt(dt);
 
+    int i;
     #pragma omp parallel for reduction(+:sum)
-    for (int i = 0; i < N_paths; ++i) {
+    for (i = 0; i < N_paths; ++i) {
         int tid = omp_get_thread_num();
         double S_t = S;
         int barrier_hit = 0;
