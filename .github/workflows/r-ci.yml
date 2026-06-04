@@ -24,12 +24,15 @@ jobs:
 
       - uses: actions/checkout@v4
 
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get -y install r-base-dev libgsl-dev libgomp1
-          sudo Rscript -e "install.packages(c('Rcpp', 'testthat'))"
+          sudo apt-get -y install libgsl-dev libgomp1
 
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
@@ -41,15 +44,16 @@ jobs:
           echo "CC=gcc-${VER}" >> ~/.R/Makevars
           echo "CXX=g++-${VER}" >> ~/.R/Makevars
           echo "FC=gfortran-${VER}" >> ~/.R/Makevars
-          Rscript -e "install.packages(c('Rcpp', 'testthat'))"
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
+        shell: pwsh
         run: |
-          pacman -Sy --noconfirm mingw-w64-ucrt-x86_64-gsl
-          Rscript -e "install.packages(c('Rcpp', 'testthat'))"
-        shell: C:\rtools44\usr\bin\bash.exe {0}
+          & "C:\rtools44\usr\bin\bash.exe" -c "pacman -Sy --noconfirm mingw-w64-ucrt-x86_64-gsl"
 
+      - name: Install R packages
+        run: Rscript -e "install.packages(c('Rcpp', 'testthat'), repos='https://cloud.r-project.org')"
+        
       - name: Install Volaris
         run: R CMD INSTALL .
         working-directory: R/Volaris
