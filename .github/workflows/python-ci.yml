@@ -33,7 +33,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get -y install libgsl-dev libgomp1
-          pip install cython numpy pytest
+          pip install cython numpy pytest wheel
 
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
@@ -43,14 +43,16 @@ jobs:
           VER=${GCC#gcc-}
           echo "CC=gcc-${VER}" >> $GITHUB_ENV
           echo "CXX=g++-${VER}" >> $GITHUB_ENV
-          pip install cython numpy pytest
+          echo "CONDA_PREFIX=$(brew --prefix)" >> $GITHUB_ENV
+          pip install cython numpy pytest wheel
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          & "$env:CONDA\Scripts\conda.exe" install -y -c conda-forge gsl numpy cython
-          pip install pytest
+          & "$env:CONDA\Scripts\conda.exe" install -y -c conda-forge gsl
+          echo "CONDA_PREFIX=$env:CONDA" >> $env:GITHUB_ENV
+          pip install cython numpy pytest wheel
 
       - name: Install Volaris
         run: pip install -e . --no-build-isolation

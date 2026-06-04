@@ -44,12 +44,14 @@ jobs:
           echo "CC=gcc-${VER}" >> ~/.R/Makevars
           echo "CXX=g++-${VER}" >> ~/.R/Makevars
           echo "FC=gfortran-${VER}" >> ~/.R/Makevars
+          echo "CPPFLAGS=-I$(brew --prefix gsl)/include" >> ~/.R/Makevars
+          echo "LDFLAGS=-L$(brew --prefix gsl)/lib" >> ~/.R/Makevars
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          & "C:\rtools44\usr\bin\bash.exe" -c "pacman -Sy --noconfirm mingw-w64-ucrt-x86_64-gsl"
+          & "$env:RTOOLS44_HOME\usr\bin\bash.exe" -c "pacman -Sy --noconfirm mingw-w64-ucrt-x86_64-gsl"
 
       - name: Install R packages
         run: Rscript -e "install.packages(c('Rcpp', 'testthat'), repos='https://cloud.r-project.org')"
