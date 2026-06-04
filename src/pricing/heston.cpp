@@ -2,8 +2,8 @@
 #include <complex>
 #include <cmath>
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
+#ifndef PI
+#define PI 3.14159265358979323846
 #endif
 
 using Cx = std::complex<double>;
@@ -52,15 +52,15 @@ namespace volaris {
         const double U_max = 100.0;
         const double du = (U_max - eps) / N;
 
-        double sum = heston_integrand(eps,   tau, S, K, r, v0, kappa, theta, xi, rho, j) + heston_integrand(U_max, tau, S, K, r, v0, kappa, theta, xi, rho, j);
+        double sum = heston_integrand(eps, tau, S, K, r, v0, kappa, theta, xi, rho, j) + heston_integrand(U_max, tau, S, K, r, v0, kappa, theta, xi, rho, j);
 
-        for (int k = 1; k < N; ++k) {
+        for (size_t k = 1; k < (size_t)N; ++k) {
             double u = eps + k * du;
             double w = (k % 2 == 0) ? 2.0 : 4.0;
             sum += w * heston_integrand(u, tau, S, K, r, v0, kappa, theta, xi, rho, j);
         }
 
-        return 0.5 + (du / 3.0) * sum / M_PI;
+        return 0.5 + (du / 3.0) * sum / PI;
     }
 
 

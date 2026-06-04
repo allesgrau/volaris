@@ -1,6 +1,9 @@
-#define _USE_MATH_DEFINES
 #include "black_scholes.h"
 #include <math.h>
+
+#ifndef PI
+#define PI 3.14159265358979323846
+#endif
 
 
 /* distribution function for the N(0,1) distribution */
@@ -15,7 +18,7 @@ static double norm_cdf(double x)
 
 static double norm_pdf(double x) 
 {
-    return (1.0 / sqrt(2.0 * M_PI)) * exp(-0.5 * x * x);
+    return (1.0 / sqrt(2.0 * PI)) * exp(-0.5 * x * x);
 }
 
 

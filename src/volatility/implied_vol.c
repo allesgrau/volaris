@@ -2,9 +2,7 @@
 #include "black_scholes.h"
 #include <math.h>
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
+#define PI 3.14159265358979323846
 
 
 double implied_vol(double market_price, double S, double K, double T, double r, int is_call)
@@ -17,7 +15,7 @@ double implied_vol(double market_price, double S, double K, double T, double r, 
     if (bs_price(S, K, T, r, low, is_call) > market_price || bs_price(S, K, T, r, high, is_call) < market_price)
         return NAN;
 
-    double sigma = sqrt(2.0 * M_PI / T) * market_price / S;
+    double sigma = sqrt(2.0 * PI / T) * market_price / S;
     sigma = (sigma < low) ? low : ((sigma > high) ? high : sigma);
 
     for (size_t i=0; i < MAX_ITER; ++i)

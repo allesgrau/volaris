@@ -1,0 +1,59 @@
+name: R CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+
+  build:
+
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest}
+          - {os: macos-latest}
+          - {os: windows-latest}
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install r-base-dev libgsl-dev libgomp1
+          sudo Rscript -e "install.packages(c('Rcpp', 'testthat'))"
+
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install gsl gcc
+          GCC=$(ls $(brew --prefix gcc)/bin/gcc-* | grep -oE 'gcc-[0-9]+$' | head -1)
+          VER=${GCC#gcc-}
+          mkdir -p ~/.R
+          echo "CC=gcc-${VER}" >> ~/.R/Makevars
+          echo "CXX=g++-${VER}" >> ~/.R/Makevars
+          echo "FC=gfortran-${VER}" >> ~/.R/Makevars
+          Rscript -e "install.packages(c('Rcpp', 'testthat'))"
+
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          pacman -Sy --noconfirm mingw-w64-ucrt-x86_64-gsl
+          Rscript -e "install.packages(c('Rcpp', 'testthat'))"
+        shell: C:\rtools44\usr\bin\bash.exe {0}
+
+      - name: Install Volaris
+        run: R CMD INSTALL .
+        working-directory: R/Volaris
+
+      - name: Test
+        run: Rscript -e "testthat::test_local('tests/testthat')"
+        working-directory: R/Volaris

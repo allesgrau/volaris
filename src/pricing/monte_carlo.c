@@ -13,7 +13,7 @@ double mc_price_european(double S, double K, double T, double r, double sigma, i
 {
     int tmax = omp_get_max_threads();
     unsigned long long* seeds = (unsigned long long*)malloc(tmax * sizeof(unsigned long long));
-    for (int i = 0; i < tmax; ++i)
+    for (size_t i = 0; i < (size_t)tmax; ++i)
         seeds[i] = (unsigned long long)(i + 1) * 2654435761ULL;
     
     double sum = 0.0;
@@ -23,7 +23,7 @@ double mc_price_european(double S, double K, double T, double r, double sigma, i
     double vol = sigma * sqrt(T);
 
     #pragma omp parallel for reduction(+:sum, sum_sq)
-    for (int i = 0; i < N_paths; ++i) {
+    for (size_t i = 0; i < (size_t)N_paths; ++i) {
         int tid = omp_get_thread_num();
         double z = lcg_normal(&seeds[tid]);
         double S_T = S * exp(drift + vol * z);
@@ -48,7 +48,7 @@ double mc_price_asian(double S, double K, double T, double r, double sigma, int 
 {
     int tmax = omp_get_max_threads();
     unsigned long long* seeds = (unsigned long long*)malloc(tmax * sizeof(unsigned long long));
-    for (int i = 0; i < tmax; ++i)
+    for (size_t i = 0; i < (size_t)tmax; ++i)
         seeds[i] = (unsigned long long)(i + 1) * 2654435761ULL;
 
     double sum = 0.0;
@@ -58,11 +58,11 @@ double mc_price_asian(double S, double K, double T, double r, double sigma, int 
     double vol = sigma * sqrt(dt);
 
     #pragma omp parallel for reduction(+:sum)
-    for (int i = 0; i < N_paths; ++i) {
+    for (size_t i = 0; i < (size_t)N_paths; ++i) {
         int tid = omp_get_thread_num();
         double S_t = S;
         double path_sum = 0.0;
-        for (int t = 0; t < N_steps; ++t) {
+        for (size_t t = 0; t < (size_t)N_steps; ++t) {
             S_t *= exp(drift + vol * lcg_normal(&seeds[tid]));
             path_sum += S_t;
         }
@@ -82,7 +82,7 @@ double mc_price_barrier(double S, double K, double T, double r, double sigma, in
 {
     int tmax = omp_get_max_threads();
     unsigned long long* seeds = (unsigned long long*)malloc(tmax * sizeof(unsigned long long));
-    for (int i = 0; i < tmax; ++i)
+    for (size_t i = 0; i < (size_t)tmax; ++i)
         seeds[i] = (unsigned long long)(i + 1) * 2654435761ULL;
 
     double sum = 0.0;
@@ -92,11 +92,11 @@ double mc_price_barrier(double S, double K, double T, double r, double sigma, in
     double vol = sigma * sqrt(dt);
 
     #pragma omp parallel for reduction(+:sum)
-    for (int i = 0; i < N_paths; ++i) {
+    for (size_t i = 0; i < (size_t)N_paths; ++i) {
         int tid = omp_get_thread_num();
         double S_t = S;
         int barrier_hit = 0;
-        for (int t = 0; t < N_steps; ++t) {
+        for (size_t t = 0; t < (size_t)N_steps; ++t) {
             S_t *= exp(drift + vol * lcg_normal(&seeds[tid]));
             int hit = is_upper ? (S_t >= B) : (S_t <= B);
             if (hit)
