@@ -10,6 +10,8 @@
 #include "../../../src/simulation/gbm.c"
 #include "../../../src/simulation/mcmc.c"
 #include "../../../src/simulation/jump_diffusion.c"
+#include "../../../src/numerical/rootfind.c"
+#include "../../../src/numerical/integrate.c"
 
 
 SEXP r_bs_price(SEXP S, SEXP K, SEXP T, SEXP r, SEXP sigma, SEXP is_call)
@@ -281,4 +283,77 @@ SEXP r_merton_paths(SEXP S0, SEXP mu, SEXP sigma, SEXP lambda, SEXP mu_j, SEXP s
     
     free(buf);
     return out;
+}
+
+
+static SEXP _r_rf_f_fn  = NULL;
+static SEXP _r_rf_df_fn = NULL;
+
+static double _r_rf_f(double x)
+{
+    SEXP arg = PROTECT(Rf_ScalarReal(x));
+    SEXP call = PROTECT(Rf_lang2(_r_rf_f_fn, arg));
+    SEXP res = PROTECT(Rf_eval(call, R_GlobalEnv));
+    double val = REAL(res)[0];
+    UNPROTECT(3);
+    return val;
+}
+
+static double _r_rf_df(double x)
+{
+    SEXP arg = PROTECT(Rf_ScalarReal(x));
+    SEXP call = PROTECT(Rf_lang2(_r_rf_df_fn, arg));
+    SEXP res = PROTECT(Rf_eval(call, R_GlobalEnv));
+    double val = REAL(res)[0];
+    UNPROTECT(3);
+    return val;
+}
+
+
+SEXP r_rootfind_newton(SEXP f, SEXP df, SEXP x0, SEXP tol, SEXP max_iter)
+{
+    _r_rf_f_fn  = f;
+    _r_rf_df_fn = df;
+    double result = rootfind_newton(_r_rf_f, _r_rf_df, REAL(x0)[0], REAL(tol)[0], INTEGER(max_iter)[0]);
+    return Rf_ScalarReal(result);
+}
+
+
+SEXP r_rootfind_bisect(SEXP f, SEXP a, SEXP b, SEXP tol, SEXP max_iter)
+{
+    _r_rf_f_fn = f;
+    double result = rootfind_bisect(_r_rf_f, REAL(a)[0], REAL(b)[0], REAL(tol)[0], INTEGER(max_iter)[0]);
+    return Rf_ScalarReal(result);
+}
+
+
+typedef struct { 
+    SEXP fn; 
+} r_scalar_ctx;
+
+static double _r_scalar_f(double x, void *params)
+{
+    SEXP fn = ((r_scalar_ctx *)params)->fn;
+    SEXP arg = PROTECT(Rf_ScalarReal(x));
+    SEXP call = PROTECT(Rf_lang2(fn, arg));
+    SEXP res = PROTECT(Rf_eval(call, R_GlobalEnv));
+    double val = REAL(res)[0];
+    UNPROTECT(3);
+    return val;
+}
+
+
+SEXP r_integrate_gauss(SEXP f, SEXP a, SEXP b, SEXP n_points)
+{
+    r_scalar_ctx ctx = { f };
+    double result = integrate_gauss(_r_scalar_f, REAL(a)[0], REAL(b)[0], INTEGER(n_points)[0], &ctx);
+    return Rf_ScalarReal(result);
+}
+
+
+SEXP r_integrate_gsl(SEXP f, SEXP a, SEXP b, SEXP tol)
+{
+    r_scalar_ctx ctx = { f };
+    double result = integrate_gsl(_r_scalar_f, REAL(a)[0], REAL(b)[0], REAL(tol)[0], &ctx);
+    return Rf_ScalarReal(result);
 }

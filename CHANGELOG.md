@@ -30,3 +30,13 @@ All notable changes to this project will be documented in this file.
 
 ### Modified
 - Changed plans for the package: dropped the `risk/` part.
+
+## [0.2.1] – 2026-06-04
+
+### Added
+
+- Full implementation of `numerical/rootfind` and `numerical/integrate`, thus making the source C/C++ code for the package complete.
+
+### Modified
+
+- Changed plans for the package: dropped one functionality from the `numerical/` part due to it being very difficult to implement.

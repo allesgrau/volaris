@@ -1,4 +1,5 @@
 import sys
+import os
 from setuptools import setup, Extension
 from Cython.Build import cythonize
 import numpy as np
@@ -6,6 +7,16 @@ import numpy as np
 extra_cpp_comp_args = [] if sys.platform == "win32" else ["-std=c++14", "-O3", "-fopenmp"]
 extra_c_comp_args = [] if sys.platform == "win32" else ["-std=c11", "-O3", "-fopenmp"]
 extra_openmp_arg = [] if sys.platform == "win32" else ["-fopenmp"]
+
+
+conda_prefix = os.environ.get("CONDA_PREFIX", "") or sys.prefix
+if sys.platform == "win32":
+  gsl_inc = [os.path.join(conda_prefix, "Library", "include")]
+  gsl_lib = [os.path.join(conda_prefix, "Library", "lib")]
+else:
+  gsl_inc = [os.path.join(conda_prefix, "include")]
+  gsl_lib = [os.path.join(conda_prefix, "lib")]
+
 
 ext_core = Extension(
     name="volaris._core",
@@ -20,13 +31,19 @@ ext_core = Extension(
       "../src/simulation/gbm.c",
       "../src/simulation/mcmc.c",
       "../src/simulation/jump_diffusion.c",
+      "../src/numerical/rootfind.c",
+      "../src/numerical/integrate.c",
     ],
     include_dirs=[
       "../src/pricing",
       "../src/volatility",
       "../src/simulation",
+      "../src/numerical",
+      *gsl_inc,
       np.get_include(),
     ],
+    library_dirs=gsl_lib,
+    libraries=["gsl", "gslcblas"],
     extra_compile_args=extra_c_comp_args,
     extra_link_args=extra_openmp_arg
   )

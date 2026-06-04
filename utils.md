@@ -49,3 +49,14 @@ python -c "from volaris._core import binomial_price; print(binomial_price(100, 1
 * Sprawdź jeszcze raz, czy każdy wzór serio jest dobrze zaimplementowany.
 * Pozamieniać int i=0 na size_t i=0 tam gdzie mi się powaliło.
 * Ujednolicić formatowanie.
+
+## Co można by więcej zrobić?
+
+* VaR, CVaR calculation
+* solving partial differential equations
+* statistical testing (is something significant?)
+
+## Co było trudne
+
+* `seeds[t] = (unsigned long long)(t + 1) * 1234567891ULL;` -- losowanie deterministyczne takie żeby działało w Pythonie i w R
+* `return c_integrate_gsl(_scalar, a, b, tol, <void *>f)` -- rzutowania i adresowania konieczne by funkcje zadziałały w Pythonie

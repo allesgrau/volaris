@@ -33,6 +33,14 @@ cdef extern from "mcmc.h":
 cdef extern from "jump_diffusion.h":
     void    c_merton_paths "merton_paths"  (double S0, double mu, double sigma, double lambda_, double mu_j, double sigma_j, double T, int N_steps, int N_paths, double *out)
 
+cdef extern from "rootfind.h":
+    double  c_rootfind_newton   "rootfind_newton"   (double (*f)(double), double (*df)(double), double x0, double tol, int max_iter)
+    double  c_rootfind_bisect   "rootfind_bisect"   (double (*f)(double), double a, double b, double tol, int max_iter)
+
+cdef extern from "integrate.h":
+    double  c_integrate_gauss   "integrate_gauss"   (double (*f)(double, void *), double a, double b, int n_points, void *params)
+    double  c_integrate_gsl     "integrate_gsl"     (double (*f)(double, void *), double a, double b, double tol, void *params)
+
 
 def bs_price(double S, double K, double T, double r, double sigma, int is_call):
     """
@@ -627,3 +635,137 @@ def merton_paths(double S0, double mu, double sigma, double lambda_, double mu_j
     cdef double[:, ::1] buf = out
     c_merton_paths(S0, mu, sigma, lambda_, mu_j, sigma_j, T, N_steps, N_paths, &buf[0, 0])
     return out
+
+
+cdef object f_func
+
+cdef object df_func
+
+cdef double _rf_f(double x) noexcept:
+    return f_func(x)
+
+cdef double _rf_df(double x) noexcept:
+    return df_func(x)
+
+
+def rootfind_newton(f, df, double x0, double tol=1e-10, int max_iter=1000):
+    """
+    Find a root of f(x) = 0 using the Newton-Raphson method.
+
+    Parameters
+    ----------
+    f : callable
+        scalar function whose root we seek
+    df : callable
+        derivative of f
+    x0 : float
+        initial guess
+    tol : float
+        convergence tolerance
+    max_iter : int
+        maximum iterations
+
+    Returns
+    -------
+    float
+        approximate root of f
+
+    Examples
+    --------
+    >>> rootfind_newton(lambda x: x*x - 2, lambda x: 2*x, 1.5)
+    1.4142135623730951
+    """
+
+    global f_func, df_func
+    f_func  = f
+    df_func = df
+    return c_rootfind_newton(_rf_f, _rf_df, x0, tol, max_iter)
+
+
+def rootfind_bisect(f, double a, double b, double tol=1e-10, int max_iter=1000):
+    """
+    Find a root of f(x) = 0 in [a, b] using bisection.
+
+    Parameters
+    ----------
+    f : callable
+        scalar function whose root we seek
+    a, b : float
+        bracket endpoints
+    tol : float
+        convergence tolerance
+    max_iter : int
+        maximum iterations
+
+    Returns
+    -------
+    float
+        approximate root
+
+    Examples
+    --------
+    >>> rootfind_bisect(lambda x: x*x - 2, 1.0, 2.0)
+    1.4142135623...
+    """
+
+    global f_func
+    f_func = f
+    return c_rootfind_bisect(_rf_f, a, b, tol, max_iter)
+
+
+cdef double _scalar(double x, void *params) noexcept:
+    return (<object>params)(x)
+
+
+def integrate_gauss(f, double a, double b, int n_points=10):
+    """
+    Integrate f over [a, b] using Gauss quadrature.
+
+    Parameters
+    ----------
+    f : callable
+        scalar function which we will integrate
+    a, b : float
+        integration limits
+    n_points : int
+        number of quadrature points
+
+    Returns
+    -------
+    float
+        approximate integral
+
+    Examples
+    --------
+    >>> integrate_gauss(lambda x: x*x, 0.0, 1.0, 10)
+    0.3333333333333333
+    """
+
+    return c_integrate_gauss(_scalar, a, b, n_points, <void *>f)
+
+
+def integrate_gsl(f, double a, double b, double tol=1e-8):
+    """
+    Integrate f over [a, b] using GSL QAGS adaptive integration.
+
+    Parameters
+    ----------
+    f : callable
+        scalar function which we will integrate
+    a, b : float
+        integration limits
+    tol : float
+        relative tolerance
+
+    Returns
+    -------
+    float
+        approximate integral
+
+    Examples
+    --------
+    >>> integrate_gsl(lambda x: x*x, 0.0, 1.0)
+    0.3333333333333333
+    """
+    
+    return c_integrate_gsl(_scalar, a, b, tol, <void *>f)

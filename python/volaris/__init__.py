@@ -7,6 +7,8 @@ from ._core import (
     gbm_paths, gbm_paths_antithetic,
     mh_sampler_gbm,
     merton_paths,
+    rootfind_newton, rootfind_bisect,
+    integrate_gauss, integrate_gsl,
 )
 
 from ._heston_garch import (
