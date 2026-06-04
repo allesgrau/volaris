@@ -1,5 +1,6 @@
 #include "historical_vol.h"
 #include <math.h>
+#include <stdlib.h>
 
 #define TRADING_DAYS 252.0
 

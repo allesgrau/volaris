@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
-          brew install gsl gcc llvm-openmp
+          brew install gsl gcc libomp
           GCC=$(ls $(brew --prefix gcc)/bin/gcc-* | grep -oE 'gcc-[0-9]+$' | head -1)
           VER=${GCC#gcc-}
           echo "CC=gcc-${VER}" >> $GITHUB_ENV
@@ -47,9 +47,9 @@ jobs:
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
-        shell: bash -el {0}
+        shell: pwsh
         run: |
-          conda install -y gsl numpy cython llvm-openmp
+          & "$env:CONDA\Scripts\conda.exe" install -y -c conda-forge gsl numpy cython
           pip install pytest
 
       - name: Install Volaris

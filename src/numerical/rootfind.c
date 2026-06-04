@@ -1,5 +1,6 @@
 #include "rootfind.h"
 #include <math.h>
+#include <stdlib.h>
 
 
 double rootfind_newton(double (*f)(double), double (*df)(double), double x0, double tol, int max_iter)
