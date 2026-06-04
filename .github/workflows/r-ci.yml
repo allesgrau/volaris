@@ -53,12 +53,14 @@ jobs:
         run: pacman -Sy --noconfirm mingw-w64-ucrt-x86_64-gsl
 
       - name: Install R packages
-        run: Rscript -e "install.packages(c('Rcpp', 'testthat'), repos='https://cloud.r-project.org')"
+        run: Rscript -e "install.packages(c('Rcpp', 'testthat'))"
         
       - name: Install Volaris
+        shell: bash
         run: R CMD INSTALL .
         working-directory: R/Volaris
 
       - name: Test
+        shell: bash
         run: Rscript -e "testthat::test_local('tests/testthat')"
         working-directory: R/Volaris
