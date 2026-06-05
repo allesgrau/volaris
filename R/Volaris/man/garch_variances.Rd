@@ -22,7 +22,7 @@ Returns a numeric vector of length equal to returns with conditional variances.
 Computes conditional variances of the historical data from fitted GARCH(1,1) parameters.
 }
 \examples{
-r <- diff(log(c(100, 101, 99, 102, 98, 103)))
+r <- diff(log(c(100, 101, 99, 102, 98, 103, 105, 104, 106, 103, 101)))
 fit <- garch_fit(r)
 garch_variances(fit$omega, fit$alpha, fit$beta, r)
 }

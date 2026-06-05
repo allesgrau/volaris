@@ -54,7 +54,12 @@ jobs:
 
       - name: Install R packages
         run: Rscript -e "install.packages(c('Rcpp', 'testthat'))"
+
+      - uses: r-lib/actions/setup-tinytex@v2
         
       - name: R CMD check
-        run: R CMD check --as-cran .
+        shell: bash
         working-directory: R/Volaris
+        run: |
+          R CMD build .
+          R CMD check --as-cran Volaris_*.tar.gz

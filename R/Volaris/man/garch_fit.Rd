@@ -16,6 +16,6 @@ Returns a list with elements: omega, alpha, beta, log_likelihood, converged, per
 Fits a GARCH(1,1) model to a historical return series via maximum likelihood estimation using the Nelder-Mead optimizer.
 }
 \examples{
-r <- diff(log(c(100, 101, 99, 102, 98, 103)))
+r <- diff(log(c(100, 101, 99, 102, 98, 103, 105, 104, 106, 103, 101)))
 garch_fit(r)
 }

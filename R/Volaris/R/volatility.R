@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' r <- diff(log(c(100, 101, 99, 102, 98, 103)))
+#' r <- diff(log(c(100, 101, 99, 102, 98, 103, 105, 104, 106, 103, 101)))
 #' garch_fit(r)
 garch_fit <- function(returns) {
     garch11_fit_r(as.numeric(returns))
@@ -39,7 +39,7 @@ garch_fit <- function(returns) {
 #' @export
 #'
 #' @examples
-#' r <- diff(log(c(100, 101, 99, 102, 98, 103)))
+#' r <- diff(log(c(100, 101, 99, 102, 98, 103, 105, 104, 106, 103, 101)))
 #' fit <- garch_fit(r)
 #' garch_variances(fit$omega, fit$alpha, fit$beta, r)
 garch_variances <- function(omega, alpha, beta, returns) {
@@ -65,7 +65,7 @@ garch_variances <- function(omega, alpha, beta, returns) {
 #' @export
 #'
 #' @examples
-#' r <- diff(log(c(100, 101, 99, 102, 98, 103)))
+#' r <- diff(log(c(100, 101, 99, 102, 98, 103, 105, 104, 106, 103, 101)))
 #' fit <- garch_fit(r)
 #' garch_forecast(fit$omega, fit$alpha, fit$beta, r, 10)
 garch_forecast <- function(omega, alpha, beta, returns, h) {
