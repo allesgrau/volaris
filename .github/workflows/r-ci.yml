@@ -55,9 +55,12 @@ jobs:
       - name: Install R packages
         run: Rscript -e "install.packages(c('Rcpp', 'testthat'))"
 
-      - uses: r-lib/actions/setup-tinytex@v2
+      - name: Fix line endings (Windows)
+        if: runner.os == 'Windows'
+        shell: bash
+        run: find R/Volaris/src R/Volaris/R -type f | xargs sed -i 's/\r//'
         
       - name: R CMD check
         shell: bash
         working-directory: R/Volaris
-        run: R CMD check --as-cran .
+        run: R CMD check --as-cran --no-manual .
