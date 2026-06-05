@@ -10,3 +10,6 @@ dependencies = ["numpy>=1.21"]
 [build-system]
 requires = ["setuptools", "cython", "numpy"]
 build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+test = ["pytest"]

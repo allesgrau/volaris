@@ -55,12 +55,6 @@ jobs:
       - name: Install R packages
         run: Rscript -e "install.packages(c('Rcpp', 'testthat'))"
         
-      - name: Install Volaris
-        shell: bash
-        run: R CMD INSTALL .
-        working-directory: R/Volaris
-
-      - name: Test
-        shell: bash
-        run: Rscript -e "testthat::test_local('tests/testthat')"
+      - name: R CMD check
+        run: R CMD check --as-cran .
         working-directory: R/Volaris

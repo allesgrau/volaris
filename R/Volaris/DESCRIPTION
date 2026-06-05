@@ -8,9 +8,10 @@ Authors@R: c(person("Barbara", "Gawlik", role = c("aut", "cre"),
 Author: Barbara Gawlik [aut, cre]
 Maintainer: Barbara Gawlik <basia.m.gawlik@gmail.com>
 Depends: R (>= 4.0.0)
+Suggests: testthat (>= 3.0.0)
+SystemRequirements: GNU GSL (>= 2.0), OpenMP
 Imports: Rcpp
 LinkingTo: Rcpp
-Suggests: testthat (>= 3.0.0)
 License: file LICENSE
 RoxygenNote: 7.3.3
 Encoding: UTF-8
