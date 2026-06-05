@@ -60,6 +60,4 @@ jobs:
       - name: R CMD check
         shell: bash
         working-directory: R/Volaris
-        run: |
-          R CMD build .
-          R CMD check --as-cran Volaris_*.tar.gz
+        run: R CMD check --as-cran .
