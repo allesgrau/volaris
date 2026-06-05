@@ -52,6 +52,7 @@ jobs:
         run: |
           & "$env:CONDA\Scripts\conda.exe" install -y -c conda-forge gsl
           echo "CONDA_PREFIX=$env:CONDA" >> $env:GITHUB_ENV
+          echo "$env:CONDA\Library\bin" >> $env:GITHUB_PATH
           pip install cython numpy pytest wheel
 
       - name: Install Volaris
