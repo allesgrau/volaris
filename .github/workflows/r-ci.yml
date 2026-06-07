@@ -53,7 +53,7 @@ jobs:
         run: pacman -Sy --noconfirm mingw-w64-ucrt-x86_64-gsl
 
       - name: Install R packages
-        run: Rscript -e "install.packages(c('Rcpp', 'testthat'))"
+        run: Rscript -e "install.packages(c('Rcpp', 'testthat', 'knitr', 'rmarkdown'))"
 
       - name: Fix line endings (Windows)
         if: runner.os == 'Windows'

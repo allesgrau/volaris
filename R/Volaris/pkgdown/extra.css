@@ -1,6 +1,7 @@
-.pkg-logo {
-    width: 700px !important;
-    float: none !important;
-    display: block !important;
-    margin-left: auto;
+.pkg-logo,
+img[src*="logo"] {
+    width: 300px !important;
+    max-width: 300px !important;
+    float: right;
+    margin-left: 1rem;
 }
