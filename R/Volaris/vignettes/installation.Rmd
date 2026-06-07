@@ -96,23 +96,22 @@ R CMD INSTALL R/Volaris
 
 ### Windows
 
-1. Install [R](https://cran.r-project.org/bin/windows/base/): download the `.exe` installer and run it.
-2. Install [Rtools](https://cran.r-project.org/bin/windows/Rtools/): choose the version matching your R version (e.g. Rtools45 for R 4.5.x). Download and run the installer.
-3. Open **Rtools Bash**: press Start, search for *Rtools*, and open **Rtools Bash** (a terminal window).
-4. In Rtools Bash, install GSL:
+1. Install [Rtools](https://cran.r-project.org/bin/windows/Rtools/): choose the version matching your R version (e.g. Rtools45 for R 4.5.x). Download and run the installer.
+2. Open **Rtools Bash**: press Start, search for *Rtools*, and open **Rtools Bash** (a terminal window).
+3. In Rtools Bash, install GSL:
 ```bash
 pacman -S mingw-w64-ucrt-x86_64-gsl
 ```
-1. Clone the repository (still in Rtools Bash):
+Clone the repository (still in Rtools Bash):
 ```bash
 git clone https://github.com/allesgrau/volaris.git
 cd volaris
 ```
-1. Open R and install the required R package:
+Open R and install the required R package:
 ```r
 install.packages("Rcpp")
 ```
-1. Back in PowerShell (regular Windows terminal), from the repo root:
+Back in PowerShell (regular Windows terminal), from the repo root:
 ```powershell
 R CMD INSTALL R\Volaris
 ```
