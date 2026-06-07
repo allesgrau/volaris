@@ -8,8 +8,8 @@ running Monte Carlo simulations, Volaris gives you C-speed without
 leaving Python or R.
 
 If you want a hands-on introduction to these topics, check out the
-[notebooks](https://allesgrau.github.io/volaris/notebooks/) directory
-for worked examples.
+[notebooks](https://github.com/allesgrau/volaris/tree/main/notebooks)
+directory for worked examples.
 
 Available as:
 

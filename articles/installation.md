@@ -8,7 +8,9 @@ You will need [Miniconda](https://docs.anaconda.com/miniconda/).
 Download the installer for your OS from the link and follow the
 on-screen steps.
 
-- **macOS** Open Terminal and run:
+#### macOS
+
+Open Terminal and run:
 
 ``` bash
 git clone https://github.com/allesgrau/volaris.git
@@ -21,7 +23,9 @@ cd python
 pip install -e .
 ```
 
-- **Ubuntu** Open Terminal and run:
+#### Ubuntu
+
+Open Terminal and run:
 
 ``` bash
 git clone https://github.com/allesgrau/volaris.git
@@ -34,7 +38,9 @@ cd python
 pip install -e .
 ```
 
-- **Windows** Open Anaconda Prompt (installed with Miniconda) and run:
+#### Windows
+
+Open Anaconda Prompt (installed with Miniconda) and run:
 
 ``` ps1
 git clone https://github.com/allesgrau/volaris.git
@@ -46,7 +52,7 @@ cd python
 pip install -e .
 ```
 
-**Quick check (any OS)**
+#### Quick check (any OS)
 
 ``` python
 import volaris
@@ -55,7 +61,7 @@ print(volaris.bs_price(100, 100, 1.0, 0.05, 0.2, 1))  # ~10.45
 
 ### R
 
-- **macOS**
+#### macOS
 
 Open Terminal and run:
 
@@ -78,7 +84,7 @@ Then in Terminal:
 R CMD INSTALL R/Volaris
 ```
 
-- **Ubuntu**
+#### Ubuntu
 
 Open Terminal and run:
 
@@ -101,7 +107,7 @@ Then in Terminal:
 R CMD INSTALL R/Volaris
 ```
 
-- **Windows**
+#### Windows
 
 1.  Install [R](https://cran.r-project.org/bin/windows/base/): download
     the `.exe` installer and run it.
@@ -136,7 +142,7 @@ install.packages("Rcpp")
 R CMD INSTALL R\Volaris
 ```
 
-**Quick check (any OS)**
+#### Quick check (any OS)
 
 ``` r
 

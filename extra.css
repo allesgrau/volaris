@@ -3,3 +3,12 @@
     width: auto;
     max-width: 100%;
 }
+
+.contents table th:first-child,
+.contents table td:first-child {
+    white-space: nowrap;
+}
+
+.pkg-logo {
+    width: 150px !important;
+}
