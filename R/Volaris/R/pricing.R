@@ -274,8 +274,8 @@ mc_price_european <- function(S, K, T, r, sigma, N_paths, is_call){
 #' @export
 #' 
 #' @examples
-#' mc_price_asian(100, 100, 1, 0.05, 0.2, 10000, 252, 1)
-#' stopifnot(mc_price_asian(100, 100, 1, 0.05, 0.2, 1000, 52, 1) < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
+#' asian <- mc_price_asian(100, 100, 1, 0.05, 0.2, 1000, 52, 1)
+#' stopifnot(asian < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
 mc_price_asian <- function(S, K, T, r, sigma, N_paths, N_steps, is_call){
     .Call("r_mc_price_asian",
             as.double(S), as.double(K), as.double(T), as.double(r), as.double(sigma), as.integer(N_paths), as.integer(N_steps), as.integer(is_call),
@@ -306,8 +306,8 @@ mc_price_asian <- function(S, K, T, r, sigma, N_paths, N_steps, is_call){
 #' @export
 #' 
 #' @examples
-#' mc_price_barrier(100, 100, 1, 0.05, 0.2, 10000, 252, 120, 1, 1, 1)
-#' stopifnot(mc_price_barrier(100, 100, 1, 0.05, 0.2, 1000, 52, 120, 1, 1, 1) < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
+#' barrier <- mc_price_barrier(100, 100, 1, 0.05, 0.2, 1000, 52, 120, 1, 1, 1)
+#' stopifnot(barrier < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
 mc_price_barrier <- function(S, K, T, r, sigma, N_paths, N_steps, B, is_upper, is_knockout, is_call){
     .Call("r_mc_price_barrier",
             as.double(S), as.double(K), as.double(T), as.double(r), as.double(sigma), as.integer(N_paths), as.integer(N_steps), as.double(B), as.integer(is_upper),

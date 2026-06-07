@@ -8,11 +8,12 @@ Authors@R: c(person("Barbara", "Gawlik", role = c("aut", "cre"),
 Author: Barbara Gawlik [aut, cre]
 Maintainer: Barbara Gawlik <basia.m.gawlik@gmail.com>
 Depends: R (>= 4.0.0)
-Suggests: testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown
 SystemRequirements: GNU GSL (>= 2.0), OpenMP
 Imports: Rcpp
 LinkingTo: Rcpp
-License: file LICENSE
+License: MIT + file LICENSE
 RoxygenNote: 7.3.3
 Encoding: UTF-8
 URL: https://allesgrau.github.io/volaris/
