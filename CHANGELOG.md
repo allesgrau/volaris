@@ -41,3 +41,25 @@ All notable changes to this project will be documented in this file.
 ### Modified
 
 - Changed plans for the package: dropped one functionality from the `numerical/` part due to it being very difficult to implement.
+
+## [0.2.0] – 2026-06-05
+
+### Added
+
+- Workflows for continuous integration for both Python and R.
+- Jupyter Notebooks demonstrating the capabilities and use of Volaris.
+
+### Modified
+
+- Source C/C++ code for uniform and easy-to-follow formatting. No functionalities added or changed.
+
+## [0.2.1] – 2026-06-07
+
+### Added
+
+- Files for benchmarking the most important Volaris funcitonalities.
+- Entirety of README text.
+
+### Modified
+
+- Some minor changes (e.g. compilation flags) and optimizations in the source code. No functionalities has been modified, lost or added.

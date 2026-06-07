@@ -4,10 +4,14 @@ from setuptools import setup, Extension
 from Cython.Build import cythonize
 import numpy as np
 
-extra_cpp_comp_args = ["/openmp"] if sys.platform == "win32" else ["-std=c++14", "-O3", "-fopenmp"]
-extra_c_comp_args = ["/openmp"] if sys.platform == "win32" else ["-std=c11", "-O3", "-fopenmp"]
-extra_openmp_arg = ["/openmp"] if sys.platform == "win32" else ["-fopenmp"]
-
+if (sys.platform == "win32"):
+  extra_cpp_comp_args = ["/openmp", "/arch:AVX2", "/fp:fast"]
+  extra_c_comp_args = ["/openmp", "/arch:AVX2", "/fp:fast"]
+  extra_openmp_arg = ["/openmp"]
+else:
+  extra_cpp_comp_args = ["-std=c++14", "-O3", "-march=native", "-ffast-math", "-fopenmp"]
+  extra_c_comp_args = ["-std=c11", "-O3", "-march=native", "-ffast-math", "-fopenmp"]
+  extra_openmp_arg = ["-fopenmp"]
 
 conda_prefix = os.environ.get("CONDA_PREFIX", "") or sys.prefix
 if sys.platform == "win32":

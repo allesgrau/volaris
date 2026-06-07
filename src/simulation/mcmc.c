@@ -59,11 +59,12 @@ double log_posterior_gbm(const double *theta, int n_params, void *data)
 
     double drift = (mu - 0.5 * sigma * sigma) * d->dt;
     double vol = sigma * sqrt(d->dt);
-    double log_lk = 0.0;
+    double inv_vol = 1.0 / vol;
+    double log_lk = -(double)d->n * log(vol);
 
     for (size_t i = 0; i < (size_t)d->n; ++i) {
-        double z = (d->returns[i] - drift) / vol;
-        log_lk -= 0.5 * z * z + log(vol);
+        double z = (d->returns[i] - drift) * inv_vol;
+        log_lk -= 0.5 * z * z;
     }
 
     return log_lk;

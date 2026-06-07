@@ -93,7 +93,7 @@ namespace volaris {
             });
 
             // 4b. Stop condition
-            if (loss_values[idx[3]] - loss_values[idx[0]] < tol)
+            if ((loss_values[idx[3]] - loss_values[idx[0]]) / (std::abs(loss_values[idx[0]]) + 1.0) < tol)
                 break;
 
             // 4c. Symetrical reflection of the worst point and its new loss function
