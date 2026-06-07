@@ -8,10 +8,14 @@ if (sys.platform == "win32"):
   extra_cpp_comp_args = ["/openmp", "/arch:AVX2", "/fp:fast"]
   extra_c_comp_args = ["/openmp", "/arch:AVX2", "/fp:fast"]
   extra_openmp_arg = ["/openmp"]
-else:
+elif (sys.platform == "darwin"):
   extra_cpp_comp_args = ["-std=c++14", "-O3", "-march=native", "-ffast-math", "-fopenmp"]
   extra_c_comp_args = ["-std=c11", "-O3", "-march=native", "-ffast-math", "-fopenmp"]
   extra_openmp_arg = ["-fopenmp"]
+else:
+  extra_cpp_comp_args = ["-std=c++14", "-O3", "-march=native", "-ffast-math", "-fopenmp"]
+  extra_c_comp_args = ["-std=c11", "-O3", "-march=native", "-ffast-math", "-fopenmp"]
+  extra_openmp_arg = ["-fopenmp", "-lmvec"]
 
 conda_prefix = os.environ.get("CONDA_PREFIX", "") or sys.prefix
 if sys.platform == "win32":
