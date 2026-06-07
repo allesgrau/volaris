@@ -13,12 +13,22 @@ Available as:
 
 ## Features
 
-| Module | Functions |
-|---|---|
-| **Pricing** | Black-Scholes, Binomial Tree, Monte Carlo (European, Asian, Barrier), Heston stochastic volatility |
-| **Volatility** | Historical vol (Close-to-Close, Parkinson, Garman-Klass, Yang-Zhang), Implied volatility, GARCH(1,1) fit & forecast |
-| **Simulation** | Geometric Brownian Motion (plain, antithetic), Merton jump-diffusion, MCMC (Metropolis-Hastings) |
-| **Numerical** | Root-finding (Newton-Raphson, Bisection), Numerical integration (Gauss quadrature, GSL adaptive) |
+* Pricing
+  * Black-Scholes (with Greeks calculation)
+  * Binomial Tree
+  * Monte Carlo (European, Asian, Barrier)
+  * Heston stochastic volatility
+* Volatility
+  * Historical volatility (Close-to-Close, Parkinson, Garman-Klass, Yang-Zhang)
+  * Implied volatility
+  * GARCH(1,1) fit & forecast
+* Simulation
+  * Geometric Brownian Motion (plain, antithetic)
+  * Merton jump-diffusion
+  * MCMC (Metropolis-Hastings)
+* Numerical
+  * Root-finding (Newton-Raphson, Bisection)
+  * Numerical integration (Gauss quadrature, GSL adaptive)
 
 ---
 
