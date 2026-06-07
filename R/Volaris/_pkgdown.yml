@@ -1,4 +1,55 @@
 url: https://allesgrau.github.io/volaris/
+
 template:
   bootstrap: 5
+  bootswatch: darkly
 
+navbar:
+  structure:
+    left: [intro, reference]
+    right: [search, github]
+  components:
+    github:
+      icon: fab fa-github
+      href: https://github.com/allesgrau/volaris
+
+reference:
+
+  - title: Pricing
+    contents:
+    - bs_price
+    - bs_delta
+    - bs_gamma
+    - bs_vega
+    - bs_theta
+    - bs_rho
+    - binomial_price
+    - mc_price_european
+    - mc_price_asian
+    - mc_price_barrier
+    - heston_price
+
+  - title: Volatility
+    contents:
+    - vol_close_to_close
+    - vol_parkinson
+    - vol_garman_klass
+    - vol_yang_zhang
+    - implied_vol
+    - garch_fit
+    - garch_variances
+    - garch_forecast
+
+  - title: Simulation
+    contents:
+    - gbm_paths
+    - gbm_paths_antithetic
+    - merton_paths
+    - mh_sampler_gbm
+
+  - title: Numerical
+    contents:
+    - rootfind_newton
+    - rootfind_bisect
+    - integrate_gauss
+    - integrate_gsl
