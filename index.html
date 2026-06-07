@@ -15,9 +15,6 @@
 <meta name="description" content="Fast derivatives pricing, volatility estimation, stochastic simulation, and numerical computation through a compiled C/C++ backend.">
 <meta property="og:description" content="Fast derivatives pricing, volatility estimation, stochastic simulation, and numerical computation through a compiled C/C++ backend.">
 <meta property="og:image" content="https://allesgrau.github.io/volaris/logo.svg">
-<style>
-.navbar-brand img { height: 150px !important; }
-</style>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -171,20 +168,18 @@
 </h2>
 <p>Benchmarked on Windows 11, Python 3.12, NumPy 2.x, and R 4.5.0.</p>
 <p><strong>Python</strong></p>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
-<col width="16%">
-<col width="22%">
-<col width="22%">
-<col width="22%">
-<col width="16%">
+<col width="20%">
+<col width="26%">
+<col width="26%">
+<col width="26%">
 </colgroup>
 <thead><tr>
 <th>Function</th>
 <th align="right">Volaris</th>
 <th align="right">NumPy / SciPy</th>
 <th align="right">Speedup</th>
-<th>Reference</th>
 </tr></thead>
 <tbody>
 <tr>
@@ -193,7 +188,6 @@
 <td align="right">0.1 ms</td>
 <td align="right">3.9 ms</td>
 <td align="right"><strong>36.6x</strong></td>
-<td>NumPy</td>
 </tr>
 <tr>
 <td>
@@ -201,7 +195,6 @@
 <td align="right">3.5 ms</td>
 <td align="right">6.3 ms</td>
 <td align="right"><strong>1.8x</strong></td>
-<td>NumPy</td>
 </tr>
 <tr>
 <td>
@@ -209,7 +202,6 @@
 <td align="right">&lt;0.1 ms</td>
 <td align="right">0.1 ms</td>
 <td align="right"><strong>13.9x</strong></td>
-<td>NumPy</td>
 </tr>
 <tr>
 <td>
@@ -217,7 +209,6 @@
 <td align="right">12.0 ms</td>
 <td align="right">25 933 ms</td>
 <td align="right"><strong>2,169x</strong></td>
-<td>SciPy</td>
 </tr>
 <tr>
 <td>
@@ -225,7 +216,6 @@
 <td align="right">56.3 ms</td>
 <td align="right">146.9 ms</td>
 <td align="right"><strong>2.6x</strong></td>
-<td>NumPy</td>
 </tr>
 <tr>
 <td>
@@ -233,7 +223,6 @@
 <td align="right">2.1 ms</td>
 <td align="right">271.5 ms</td>
 <td align="right"><strong>127x</strong></td>
-<td>NumPy</td>
 </tr>
 <tr>
 <td>
@@ -241,7 +230,6 @@
 <td align="right">12.2 ms</td>
 <td align="right">1 893 ms</td>
 <td align="right"><strong>155x</strong></td>
-<td>SciPy</td>
 </tr>
 <tr>
 <td>
@@ -249,7 +237,6 @@
 <td align="right">188.7 ms</td>
 <td align="right">495.9 ms</td>
 <td align="right"><strong>2.6x</strong></td>
-<td>SciPy</td>
 </tr>
 <tr>
 <td>
@@ -257,25 +244,22 @@
 <td align="right">1.1 ms</td>
 <td align="right">950.0 ms</td>
 <td align="right"><strong>844x</strong></td>
-<td>NumPy + SciPy</td>
 </tr>
 </tbody>
 </table>
 <p><strong>R</strong></p>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
-<col width="16%">
-<col width="22%">
-<col width="22%">
-<col width="22%">
-<col width="16%">
+<col width="20%">
+<col width="26%">
+<col width="26%">
+<col width="26%">
 </colgroup>
 <thead><tr>
 <th>Function</th>
 <th align="right">Volaris</th>
-<th align="right">base R</th>
+<th align="right">R</th>
 <th align="right">Speedup</th>
-<th>Reference</th>
 </tr></thead>
 <tbody>
 <tr>
@@ -284,7 +268,6 @@
 <td align="right">0.10 ms</td>
 <td align="right">2.55 ms</td>
 <td align="right"><strong>25.4x</strong></td>
-<td>base R</td>
 </tr>
 <tr>
 <td>
@@ -292,7 +275,6 @@
 <td align="right">5.2 ms</td>
 <td align="right">19.3 ms</td>
 <td align="right"><strong>3.7x</strong></td>
-<td>base R</td>
 </tr>
 <tr>
 <td>
@@ -300,7 +282,6 @@
 <td align="right">0.03 ms</td>
 <td align="right">0.13 ms</td>
 <td align="right"><strong>3.7x</strong></td>
-<td>base R</td>
 </tr>
 <tr>
 <td>
@@ -308,7 +289,6 @@
 <td align="right">56.6 ms</td>
 <td align="right">1 401.6 ms</td>
 <td align="right"><strong>24.7x</strong></td>
-<td><code>uniroot</code></td>
 </tr>
 <tr>
 <td>
@@ -316,7 +296,6 @@
 <td align="right">139.5 ms</td>
 <td align="right">606.0 ms</td>
 <td align="right"><strong>4.3x</strong></td>
-<td>base R</td>
 </tr>
 <tr>
 <td>
@@ -324,7 +303,6 @@
 <td align="right">9.2 ms</td>
 <td align="right">87.4 ms</td>
 <td align="right"><strong>9.5x</strong></td>
-<td>base R</td>
 </tr>
 <tr>
 <td>
@@ -332,7 +310,6 @@
 <td align="right">84.9 ms</td>
 <td align="right">728.3 ms</td>
 <td align="right"><strong>8.6x</strong></td>
-<td><code>uniroot</code></td>
 </tr>
 <tr>
 <td>
@@ -340,7 +317,6 @@
 <td align="right">120.5 ms</td>
 <td align="right">351.6 ms</td>
 <td align="right"><strong>2.9x</strong></td>
-<td><code><a href="https://rdrr.io/r/stats/integrate.html" class="external-link">integrate()</a></code></td>
 </tr>
 <tr>
 <td>
@@ -348,7 +324,6 @@
 <td align="right">10.6 ms</td>
 <td align="right">1.6 ms</td>
 <td align="right"><em>0.1x</em></td>
-<td><code>R optim</code></td>
 </tr>
 </tbody>
 </table>
@@ -372,10 +347,17 @@
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
-<p>MIT, see LICENSE.</p>
+<p>MIT + file LICENSE</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="">
+<h2 data-toc-skip></h2>
+<ul class="list-unstyled">
+<li><p><img src="reference/figures/logo.svg" style="width:100%;max-width:180px;display:block;margin:0 auto 1.5rem;"></p></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
@@ -383,7 +365,6 @@
 </li>
 </ul>
 </div>
-
 
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
