@@ -1,15 +1,6 @@
-table {
-    table-layout: auto !important;
-    width: auto !important;
-    max-width: 100% !important;
-}
-
-table th:first-child,
-table td:first-child {
-    white-space: nowrap !important;
-}
-
 .pkg-logo {
-    width: 220px !important;
-    max-width: 220px !important;
+    width: 300px !important;
+    float: none !important;
+    display: block !important;
+    margin-left: auto;
 }
