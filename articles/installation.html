@@ -15,9 +15,10 @@
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Getting Started">
 <style>
-.navbar-brand img { height: 80px !important; }
+.navbar-brand img { height: 150px !important; }
 </style>
 </head>
 <body>
@@ -37,7 +38,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
+<li class="active nav-item"><a class="nav-link" href="../articles/installation.html">Getting started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -66,8 +67,120 @@
 
     
     
-
-  </main>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<div class="section level3">
+<h3 id="python">Python<a class="anchor" aria-label="anchor" href="#python"></a>
+</h3>
+<p>You will need <a href="https://docs.anaconda.com/miniconda/" class="external-link">Miniconda</a>. Download the
+installer for your OS from the link and follow the on-screen steps.</p>
+<ul>
+<li>
+<strong>macOS</strong> Open Terminal and run:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/allesgrau/volaris.git</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> volaris</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">brew</span> install gsl libomp</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> volaris python=3.11</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="ex">conda</span> activate volaris</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge numpy cython</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="bu">cd</span> python</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> .</span></code></pre></div>
+<ul>
+<li>
+<strong>Ubuntu</strong> Open Terminal and run:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/allesgrau/volaris.git</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="bu">cd</span> volaris</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libgsl-dev</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> volaris python=3.11</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="ex">conda</span> activate volaris</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge numpy cython</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="bu">cd</span> python</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> .</span></code></pre></div>
+<ul>
+<li>
+<strong>Windows</strong> Open Anaconda Prompt (installed with
+Miniconda) and run:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ps1"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>git clone https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/</span>allesgrau<span class="op">/</span>volaris<span class="op">.</span><span class="fu">git</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">cd</span> volaris</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>conda create <span class="op">-</span>n volaris python<span class="op">=</span><span class="dv">3.11</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="dt">conda</span> activate volaris</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>conda install <span class="op">-</span>c conda-forge gsl numpy cython</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">cd</span> python</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>pip install <span class="op">-</span>e <span class="op">.</span></span></code></pre></div>
+<p><strong>Quick check (any OS)</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> volaris</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="bu">print</span>(volaris.bs_price(<span class="dv">100</span>, <span class="dv">100</span>, <span class="fl">1.0</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span>, <span class="dv">1</span>))  <span class="co"># ~10.45</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="r">R<a class="anchor" aria-label="anchor" href="#r"></a>
+</h3>
+<ul>
+<li><strong>macOS</strong></li>
+</ul>
+<p>Open Terminal and run:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/allesgrau/volaris.git</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="bu">cd</span> volaris</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="ex">brew</span> install r gsl</span></code></pre></div>
+<p>Then in R:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rcpp"</span><span class="op">)</span></span></code></pre></div>
+<p>Then in Terminal:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL R/Volaris</span></code></pre></div>
+<ul>
+<li><strong>Ubuntu</strong></li>
+</ul>
+<p>Open Terminal and run:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/allesgrau/volaris.git</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="bu">cd</span> volaris</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">sudo</span> apt-get install r-base libgsl-dev</span></code></pre></div>
+<p>Then in R:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rcpp"</span><span class="op">)</span></span></code></pre></div>
+<p>Then in Terminal:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL R/Volaris</span></code></pre></div>
+<ul>
+<li><strong>Windows</strong></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Install <a href="https://cran.r-project.org/bin/windows/base/" class="external-link">R</a>: download the
+<code>.exe</code> installer and run it.</li>
+<li>Install <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">Rtools</a>: choose
+the version matching your R version (e.g. Rtools45 for R 4.5.x).
+Download and run the installer.</li>
+<li>Open <strong>Rtools Bash</strong>: press Start, search for
+<em>Rtools</em>, and open <strong>Rtools Bash</strong> (a terminal
+window).</li>
+<li>In Rtools Bash, install GSL:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">pacman</span> <span class="at">-S</span> mingw-w64-ucrt-x86_64-gsl</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Clone the repository (still in Rtools Bash):</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/allesgrau/volaris.git</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="bu">cd</span> volaris</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Open R and install the required R package:</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rcpp"</span><span class="op">)</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Back in PowerShell (regular Windows terminal), from the repo
+root:</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">R</span> CMD INSTALL <span class="fu">R</span>\Volaris</span></code></pre></div>
+<p><strong>Quick check (any OS)</strong></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://allesgrau.github.io/volaris/">Volaris</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/bs_price.html">bs_price</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">1.0</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span>, <span class="fl">1L</span><span class="op">)</span>  <span class="co"># ~10.45</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

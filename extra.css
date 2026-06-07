@@ -1,0 +1,5 @@
+.contents table {
+    table-layout: auto;
+    width: auto;
+    max-width: 100%;
+}

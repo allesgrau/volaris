@@ -40,19 +40,22 @@ Available as:
     │   ├── numerical/                  #   Root-finding, Integration
     │   └── utils/                      #   LCG random number generator
     │
-    ├── python/                         # Python package (Cython bindings)
+    ├── python/                         # Python package
     │   ├── volaris/
     │   │   ├── _core.pyx               #   Cython wrapper (C modules)
     │   │   └── _heston_garch.pyx       #   Cython wrapper (C++ modules)
     │   ├── tests/
     │   └── pyproject.toml
     │
-    ├── R/Volaris/                      # R package (R/C API and Rcpp bindings)
-    │   ├── R/
-    │   ├── src/
-    │   │   ├── volaris_r.c             #   R/C API wrapper (C modules)
-    │   │   └── heston_garch_rcpp.cpp   #   Rcpp wrapper (C++ modules)
+    ├── R/Volaris/                      # R package
+    │   ├── R/                          #   R wrapper functions
+    │   ├── src/                        #   C/C++ sources (copy from src/) + R wrappers
+    │   │   ├── volaris_r.c             #     R/C API wrapper (C modules)
+    │   │   └── heston_garch_rcpp.cpp   #     Rcpp wrapper (C++ modules)
+    |   ├── man/                        #   Roxygen2-generated documentation
+    |   ├── vignettes/                  #   Getting-started guide
     │   ├── tests/
+    |   ├── _pkgdown.yml                #   pkgdown site configuration
     │   └── DESCRIPTION
     │
     ├── notebooks/                      # Jupyter notebooks with usage examples
@@ -125,152 +128,6 @@ sequential dependency prevents vectorisation in either implementation.*
 
 ------------------------------------------------------------------------
 
-## Installation
-
-### Python
-
-You will need [Miniconda](https://docs.anaconda.com/miniconda/).
-Download the installer for your OS from the link and follow the
-on-screen steps.
-
-- **macOS** Open Terminal and run:
-
-``` bash
-git clone https://github.com/allesgrau/volaris.git
-cd volaris
-brew install gsl libomp
-conda create -n volaris python=3.11
-conda activate volaris
-conda install -c conda-forge numpy cython
-cd python
-pip install -e .
-```
-
-- **Ubuntu** Open Terminal and run:
-
-``` bash
-git clone https://github.com/allesgrau/volaris.git
-cd volaris
-sudo apt-get install libgsl-dev
-conda create -n volaris python=3.11
-conda activate volaris
-conda install -c conda-forge numpy cython
-cd python
-pip install -e .
-```
-
-- **Windows** Open Anaconda Prompt (installed with Miniconda) and run:
-
-``` ps1
-git clone https://github.com/allesgrau/volaris.git
-cd volaris
-conda create -n volaris python=3.11
-conda activate volaris
-conda install -c conda-forge gsl numpy cython
-cd python
-pip install -e .
-```
-
-**Quick check (any OS)**
-
-``` python
-import volaris
-print(volaris.bs_price(100, 100, 1.0, 0.05, 0.2, 1))  # ~10.45
-```
-
-### R
-
-- **macOS**
-
-Open Terminal and run:
-
-``` bash
-git clone https://github.com/allesgrau/volaris.git
-cd volaris
-brew install r gsl
-```
-
-Then in R:
-
-``` r
-
-install.packages("Rcpp")
-```
-
-Then in Terminal:
-
-``` bash
-R CMD INSTALL R/Volaris
-```
-
-- **Ubuntu**
-
-Open Terminal and run:
-
-``` bash
-git clone https://github.com/allesgrau/volaris.git
-cd volaris
-sudo apt-get install r-base libgsl-dev
-```
-
-Then in R:
-
-``` r
-
-install.packages("Rcpp")
-```
-
-Then in Terminal:
-
-``` bash
-R CMD INSTALL R/Volaris
-```
-
-- **Windows**
-
-1.  Install [R](https://cran.r-project.org/bin/windows/base/): download
-    the `.exe` installer and run it.
-2.  Install [Rtools](https://cran.r-project.org/bin/windows/Rtools/):
-    choose the version matching your R version (e.g. Rtools45 for R
-    4.5.x). Download and run the installer.
-3.  Open **Rtools Bash**: press Start, search for *Rtools*, and open
-    **Rtools Bash** (a terminal window).
-4.  In Rtools Bash, install GSL:
-
-``` bash
-pacman -S mingw-w64-ucrt-x86_64-gsl
-```
-
-1.  Clone the repository (still in Rtools Bash):
-
-``` bash
-git clone https://github.com/allesgrau/volaris.git
-cd volaris
-```
-
-1.  Open R and install the required R package:
-
-``` r
-
-install.packages("Rcpp")
-```
-
-1.  Back in PowerShell (regular Windows terminal), from the repo root:
-
-``` powershell
-R CMD INSTALL R\Volaris
-```
-
-**Quick check (any OS)**
-
-``` r
-
-library(Volaris)
-bs_price(100, 100, 1.0, 0.05, 0.2, 1L)  # ~10.45
-```
-
-------------------------------------------------------------------------
-
 ## Usage examples
 
 See the `notebooks/` directory for full worked examples:
@@ -287,5 +144,3 @@ See the `notebooks/` directory for full worked examples:
 ## License
 
 MIT, see LICENSE.
-
-------------------------------------------------------------------------
