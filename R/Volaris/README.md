@@ -100,31 +100,31 @@ Benchmarked on Windows 11, Python 3.12, NumPy 2.x, and R 4.5.0.
 
 **Python**
 
-| Function | Volaris | NumPy / SciPy | Speedup | Reference |
-|---|---:|---:|---:|---|
-| `binomial_price` with N=400 | 0.1 ms | 3.9 ms | **36.6x** | NumPy |
-| `mc_price_european` with 100,000 paths | 3.5 ms | 6.3 ms | **1.8x** | NumPy |
-| `hist_vol_close_to_close` with n=10,000 | <0.1 ms | 0.1 ms | **13.9x** | NumPy |
-| `implied_vol` x 10,000 calls | 12.0 ms | 25 933 ms | **2,169x** | SciPy |
-| `gbm_paths` with 10,000 paths and 252 steps | 56.3 ms | 146.9 ms | **2.6x** | NumPy |
-| `mh_sampler_gbm` with 10,000 iterations | 2.1 ms | 271.5 ms | **127x** | NumPy |
-| `rootfind_newton` x 10,000 calls | 12.2 ms | 1 893 ms | **155x** | SciPy |
-| `integrate_gauss` x 10,000 calls | 188.7 ms | 495.9 ms | **2.6x** | SciPy |
-| `garch_fit` with n=1,000 returns | 1.1 ms | 950.0 ms | **844x** | NumPy + SciPy |
+| Function | Volaris | NumPy / SciPy | Speedup |
+|---|---:|---:|---:|
+| `binomial_price` with N=400 | 0.1 ms | 3.9 ms | **36.6x** | 
+| `mc_price_european` with 100,000 paths | 3.5 ms | 6.3 ms | **1.8x** | 
+| `hist_vol_close_to_close` with n=10,000 | <0.1 ms | 0.1 ms | **13.9x** | 
+| `implied_vol` x 10,000 calls | 12.0 ms | 25 933 ms | **2,169x** | 
+| `gbm_paths` with 10,000 paths and 252 steps | 56.3 ms | 146.9 ms | **2.6x** | 
+| `mh_sampler_gbm` with 10,000 iterations | 2.1 ms | 271.5 ms | **127x** |
+| `rootfind_newton` x 10,000 calls | 12.2 ms | 1 893 ms | **155x** |
+| `integrate_gauss` x 10,000 calls | 188.7 ms | 495.9 ms | **2.6x** | 
+| `garch_fit` with n=1,000 returns | 1.1 ms | 950.0 ms | **844x** |
 
 **R**
 
-| Function | Volaris | base R | Speedup | Reference |
-|---|---:|---:|---:|---|
-| `binomial_price` with N=400 | 0.10 ms | 2.55 ms | **25.4x** | base R |
-| `mc_price_european` with 100,000 paths | 5.2 ms | 19.3 ms | **3.7x** | base R |
-| `vol_close_to_close` with n=10,000 | 0.03 ms | 0.13 ms | **3.7x** | base R |
-| `implied_vol` x 10,000 calls | 56.6 ms | 1 401.6 ms | **24.7x** | `uniroot` |
-| `gbm_paths` with 10,000 paths and 252 steps | 139.5 ms | 606.0 ms | **4.3x** | base R |
-| `mh_sampler_gbm` with 10,000 iterations | 9.2 ms | 87.4 ms | **9.5x** | base R |
-| `rootfind_newton` x 10,000 calls | 84.9 ms | 728.3 ms | **8.6x** | `uniroot` |
-| `integrate_gauss` x 10,000 calls | 120.5 ms | 351.6 ms | **2.9x** | `integrate()` |
-| `garch_fit` with n=1,000 returns | 10.6 ms | 1.6 ms | *0.1x* | `R optim` |
+| Function | Volaris | R | Speedup |
+|---|---:|---:|---:|
+| `binomial_price` with N=400 | 0.10 ms | 2.55 ms | **25.4x** | 
+| `mc_price_european` with 100,000 paths | 5.2 ms | 19.3 ms | **3.7x** | 
+| `vol_close_to_close` with n=10,000 | 0.03 ms | 0.13 ms | **3.7x** | 
+| `implied_vol` x 10,000 calls | 56.6 ms | 1 401.6 ms | **24.7x** | 
+| `gbm_paths` with 10,000 paths and 252 steps | 139.5 ms | 606.0 ms | **4.3x** |
+| `mh_sampler_gbm` with 10,000 iterations | 9.2 ms | 87.4 ms | **9.5x** | 
+| `rootfind_newton` x 10,000 calls | 84.9 ms | 728.3 ms | **8.6x** | 
+| `integrate_gauss` x 10,000 calls | 120.5 ms | 351.6 ms | **2.9x** |
+| `garch_fit` with n=1,000 returns | 10.6 ms | 1.6 ms | *0.1x* |
 
 *`garch_fit` is faster, because R 4.x compiles the inner loop on the fly, making the sequential GARCH recurrence nearly as fast as C. The sequential dependency prevents vectorisation in either implementation.*
 
@@ -142,4 +142,4 @@ See the `notebooks/` directory for full worked examples:
 
 ## License
 
-MIT, see LICENSE.
+MIT + file LICENSE
