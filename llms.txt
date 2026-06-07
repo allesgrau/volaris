@@ -11,8 +11,10 @@ If you want a hands-on introduction to these topics, check out the
 [notebooks](https://allesgrau.github.io/volaris/notebooks/) directory
 for worked examples.
 
-Available as: - **Python package** – `volaris` (`python/`) - **R
-package** – `Volaris` (`R/Volaris/`)
+Available as:
+
+- **Python package** – `volaris` (`python/`)
+- **R package** – `Volaris` (`R/Volaris/`)
 
 ------------------------------------------------------------------------
 
@@ -61,15 +63,27 @@ package** – `Volaris` (`R/Volaris/`)
 
 ## Dependencies
 
-**C/C++ backend (required for both packages)** - [GNU
-GSL](https://www.gnu.org/software/gsl/) \>= 2.0: numerical integration -
-OpenMP: parallelism in Monte Carlo and GARCH
+**C/C++ backend (required for both packages)**
 
-**Python** - Python \>= 3.9 - `NumPy` \>= 1.21 - Cython
+- [GNU GSL](https://www.gnu.org/software/gsl/) \>= 2.0: numerical
+  integration
+- OpenMP: parallelism in Monte Carlo and GARCH
 
-**R** - R \>= 4.0.0 - Rcpp
+**Python**
 
-**Testing (optional)** - Python: `pytest` - R: `testthat`
+- Python \>= 3.9
+- `NumPy` \>= 1.21
+- Cython
+
+**R**
+
+- R \>= 4.0.0
+- Rcpp
+
+**Testing (optional)**
+
+- Python: `pytest`
+- R: `testthat`
 
 ------------------------------------------------------------------------
 
@@ -349,3 +363,9 @@ MIT, see LICENSE.
 - [`Volaris-package`](https://allesgrau.github.io/volaris/reference/Volaris-package.md)
   : Volaris: High-performance library for quantitative finance
 
+# Articles
+
+### Getting started
+
+- [Getting
+  Started](https://allesgrau.github.io/volaris/articles/installation.md):

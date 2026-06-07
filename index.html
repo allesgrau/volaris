@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>High-Performance Library For Quantitative Finance • Volaris</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -14,6 +19,9 @@
 <meta name="description" content="Fast derivatives pricing, volatility estimation, stochastic simulation, and numerical computation through a compiled C/C++ backend.">
 <meta property="og:description" content="Fast derivatives pricing, volatility estimation, stochastic simulation, and numerical computation through a compiled C/C++ backend.">
 <meta property="og:image" content="https://allesgrau.github.io/volaris/logo.svg">
+<style>
+.navbar-brand img { height: 80px !important; }
+</style>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -32,6 +40,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -53,7 +62,13 @@
 </div>
 <p>Volaris is a high-performance library for quantitative finance – option pricing, volatility estimation, stochastic simulation, and numerical methods, with a compiled C/C++ backend shared between Python and R. Whether you are pricing derivatives, fitting volatility models, or running Monte Carlo simulations, Volaris gives you C-speed without leaving Python or R.</p>
 <p>If you want a hands-on introduction to these topics, check out the <a href="notebooks/">notebooks</a> directory for worked examples.</p>
-<p>Available as: - <strong>Python package</strong> – <code>volaris</code> (<code>python/</code>) - <strong>R package</strong> – <code>Volaris</code> (<code>R/Volaris/</code>)</p>
+<p>Available as:</p>
+<ul>
+<li>
+<strong>Python package</strong> – <code>volaris</code> (<code>python/</code>)</li>
+<li>
+<strong>R package</strong> – <code>Volaris</code> (<code>R/Volaris/</code>)</li>
+</ul>
 <hr>
 <div class="section level2">
 <h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
@@ -123,10 +138,31 @@
 <div class="section level2">
 <h2 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
 </h2>
-<p><strong>C/C++ backend (required for both packages)</strong> - <a href="https://www.gnu.org/software/gsl/" class="external-link">GNU GSL</a> &gt;= 2.0: numerical integration - OpenMP: parallelism in Monte Carlo and GARCH</p>
-<p><strong>Python</strong> - Python &gt;= 3.9 - <code>NumPy</code> &gt;= 1.21 - Cython</p>
-<p><strong>R</strong> - R &gt;= 4.0.0 - Rcpp</p>
-<p><strong>Testing (optional)</strong> - Python: <code>pytest</code> - R: <code>testthat</code></p>
+<p><strong>C/C++ backend (required for both packages)</strong></p>
+<ul>
+<li>
+<a href="https://www.gnu.org/software/gsl/" class="external-link">GNU GSL</a> &gt;= 2.0: numerical integration</li>
+<li>OpenMP: parallelism in Monte Carlo and GARCH</li>
+</ul>
+<p><strong>Python</strong></p>
+<ul>
+<li>Python &gt;= 3.9</li>
+<li>
+<code>NumPy</code> &gt;= 1.21</li>
+<li>Cython</li>
+</ul>
+<p><strong>R</strong></p>
+<ul>
+<li>R &gt;= 4.0.0</li>
+<li>Rcpp</li>
+</ul>
+<p><strong>Testing (optional)</strong></p>
+<ul>
+<li>Python: <code>pytest</code>
+</li>
+<li>R: <code>testthat</code>
+</li>
+</ul>
 <hr>
 </div>
 <div class="section level2">
