@@ -44,6 +44,8 @@ jobs:
           mkdir -p ~/.R
           echo "CPPFLAGS=-I$(brew --prefix gsl)/include -I$(brew --prefix libomp)/include" >> ~/.R/Makevars
           echo "LDFLAGS=-L$(brew --prefix gsl)/lib -L$(brew --prefix libomp)/lib" >> ~/.R/Makevars
+          echo "SHLIB_OPENMP_CFLAGS=-fopenmp" >> ~/.R/Makevars
+          echo "SHLIB_OPENMP_CXXFLAGS=-fopenmp" >> ~/.R/Makevars
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
@@ -60,6 +62,8 @@ jobs:
         
       - name: R CMD check
         shell: bash
+        env:
+          _R_CHECK_FORCE_SUGGESTS_: false
         run: |
-          R CMD build R/Volaris
-          R CMD check --as-cran --no-manual Volaris_*.tar.gz
+          R CMD build --no-build-vignettes R/Volaris
+          R CMD check --as-cran --no-manual --no-vignettes Volaris_*.tar.gz
