@@ -42,10 +42,8 @@ jobs:
         run: |
           brew install gsl libomp
           mkdir -p ~/.R
-          echo "CPPFLAGS=-I$(brew --prefix gsl)/include -I$(brew --prefix libomp)/include" >> ~/.R/Makevars
-          echo "LDFLAGS=-L$(brew --prefix gsl)/lib -L$(brew --prefix libomp)/lib" >> ~/.R/Makevars
-          echo "SHLIB_OPENMP_CFLAGS=-fopenmp" >> ~/.R/Makevars
-          echo "SHLIB_OPENMP_CXXFLAGS=-fopenmp" >> ~/.R/Makevars
+          echo "CPPFLAGS=-I$(brew --prefix gsl)/include -I$(brew --prefix libomp)/include -Xclang -fopenmp" >> ~/.R/Makevars
+          echo "LDFLAGS=-L$(brew --prefix gsl)/lib -L$(brew --prefix libomp)/lib -lomp" >> ~/.R/Makevars
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
