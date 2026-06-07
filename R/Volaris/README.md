@@ -5,6 +5,7 @@ Volaris is a high-performance library for quantitative finance – option pricin
 If you want a hands-on introduction to these topics, check out the [notebooks](notebooks/) directory for worked examples.
 
 Available as:
+
 - **Python package** – `volaris` (`python/`)
 - **R package** – `Volaris` (`R/Volaris/`)
 
@@ -58,19 +59,23 @@ volaris/
 ## Dependencies
 
 **C/C++ backend (required for both packages)**
+
 - [GNU GSL](https://www.gnu.org/software/gsl/) >= 2.0: numerical integration
 - OpenMP: parallelism in Monte Carlo and GARCH
 
 **Python**
+
 - Python >= 3.9
 - `NumPy` >= 1.21
 - Cython
 
 **R**
+
 - R >= 4.0.0
 - Rcpp
 
 **Testing (optional)**
+
 - Python: `pytest`
 - R: `testthat`
 

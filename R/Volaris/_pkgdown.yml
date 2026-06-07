@@ -2,16 +2,26 @@ url: https://allesgrau.github.io/volaris/
 
 template:
   bootstrap: 5
-  bootswatch: darkly
+  bootswatch: flatly
+  includes:
+    in_header: |
+      <style>
+      .navbar-brand img { height: 80px !important; }
+      </style>
 
 navbar:
   structure:
-    left: [intro, reference]
+    left: [intro, articles, reference]
     right: [search, github]
   components:
     github:
       icon: fab fa-github
       href: https://github.com/allesgrau/volaris
+
+articles:
+  - title: "Getting started"
+    contents:
+    - installation
 
 reference:
 
