@@ -51,7 +51,6 @@ of the option.
 ## Examples
 
 ``` r
-mc_price_asian(100, 100, 1, 0.05, 0.2, 10000, 252, 1)
-#> [1] 5.84127
-stopifnot(mc_price_asian(100, 100, 1, 0.05, 0.2, 1000, 52, 1) < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
+asian <- mc_price_asian(100, 100, 1, 0.05, 0.2, 1000, 52, 1)
+stopifnot(asian < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
 ```

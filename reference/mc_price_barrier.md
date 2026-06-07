@@ -76,7 +76,6 @@ of the option.
 ## Examples
 
 ``` r
-mc_price_barrier(100, 100, 1, 0.05, 0.2, 10000, 252, 120, 1, 1, 1)
-#> [1] 1.36918
-stopifnot(mc_price_barrier(100, 100, 1, 0.05, 0.2, 1000, 52, 120, 1, 1, 1) < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
+barrier <- mc_price_barrier(100, 100, 1, 0.05, 0.2, 1000, 52, 120, 1, 1, 1)
+stopifnot(barrier < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
 ```

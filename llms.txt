@@ -8,8 +8,8 @@ running Monte Carlo simulations, Volaris gives you C-speed without
 leaving Python or R.
 
 If you want a hands-on introduction to these topics, check out the
-[notebooks](https://github.com/allesgrau/volaris/tree/main/notebooks)
-directory for worked examples.
+[Examples](https://allesgrau.github.io/volaris/articles/notebooks.html)
+tab on the GitHub Pages project website for worked examples.
 
 Available as:
 
@@ -141,7 +141,9 @@ sequential dependency prevents vectorisation in either implementation.*
 
 ## Usage examples
 
-See the `notebooks/` directory for full worked examples:
+See the
+[Examples](https://allesgrau.github.io/volaris/articles/notebooks.html)
+tab on the GitHub Pages project website for full worked examples:
 
 - `notebooks/01_black_scholes.ipynb` – option pricing with Black-Scholes
   and a Binomial Tree
@@ -227,6 +229,6 @@ MIT + file LICENSE
 ## Package
 
 - [`Volaris-package`](https://allesgrau.github.io/volaris/reference/Volaris-package.md)
-  : Volaris: High-performance library for quantitative finance
+  : Volaris: High-Performance Library for Quantitative Finance
 
 # Articles

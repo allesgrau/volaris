@@ -69,4 +69,4 @@
 ## Package
 
 - [`Volaris-package`](https://allesgrau.github.io/volaris/reference/Volaris-package.md)
-  : Volaris: High-performance library for quantitative finance
+  : Volaris: High-Performance Library for Quantitative Finance

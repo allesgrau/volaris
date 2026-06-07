@@ -4,7 +4,8 @@
 
 ### Python
 
-You will need [Miniconda](https://docs.anaconda.com/miniconda/).
+You will need
+[Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main).
 Download the installer for your OS from the link and follow the
 on-screen steps.
 
