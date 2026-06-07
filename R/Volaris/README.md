@@ -2,7 +2,7 @@
 
 Volaris is a high-performance library for quantitative finance – option pricing, volatility estimation, stochastic simulation, and numerical methods, with a compiled C/C++ backend shared between Python and R. Whether you are pricing derivatives, fitting volatility models, or running Monte Carlo simulations, Volaris gives you C-speed without leaving Python or R. 
 
-If you want a hands-on introduction to these topics, check out the [notebooks](notebooks/) directory for worked examples.
+If you want a hands-on introduction to these topics, check out the [notebooks](https://github.com/allesgrau/volaris/tree/main/notebooks) directory for worked examples.
 
 Available as:
 

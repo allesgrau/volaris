@@ -7,13 +7,13 @@ vignette: >
     %\VignetteEncoding{UTF-8}
 ---
 
-## Installation
+# Installation
 
-### Python
+## Python
 
 You will need [Miniconda](https://docs.anaconda.com/miniconda/). Download the installer for your OS from the link and follow the on-screen steps.
 
-- **macOS**
+### macOS
 Open Terminal and run:
 ```bash
 git clone https://github.com/allesgrau/volaris.git
@@ -26,7 +26,7 @@ cd python
 pip install -e .
 ```
 
-- **Ubuntu**
+### Ubuntu
 Open Terminal and run:
 ```bash
 git clone https://github.com/allesgrau/volaris.git
@@ -39,7 +39,7 @@ cd python
 pip install -e .
 ```
 
-- **Windows**
+### Windows
 Open Anaconda Prompt (installed with Miniconda) and run:
 ```ps1
 git clone https://github.com/allesgrau/volaris.git
@@ -51,16 +51,16 @@ cd python
 pip install -e .
 ```
 
-**Quick check (any OS)**
+### Quick check (any OS)
 ```python
 import volaris
 print(volaris.bs_price(100, 100, 1.0, 0.05, 0.2, 1))  # ~10.45
 ```
 
-### R
+## R
 
 
-- **macOS**
+### macOS
 
 Open Terminal and run:
 ```bash
@@ -77,7 +77,7 @@ Then in Terminal:
 R CMD INSTALL R/Volaris
 ```
 
-- **Ubuntu**
+### Ubuntu
 
 Open Terminal and run:
 ```bash
@@ -94,7 +94,7 @@ Then in Terminal:
 R CMD INSTALL R/Volaris
 ```
 
-- **Windows**
+### Windows
 
 1. Install [R](https://cran.r-project.org/bin/windows/base/): download the `.exe` installer and run it.
 2. Install [Rtools](https://cran.r-project.org/bin/windows/Rtools/): choose the version matching your R version (e.g. Rtools45 for R 4.5.x). Download and run the installer.
@@ -117,7 +117,7 @@ install.packages("Rcpp")
 R CMD INSTALL R\Volaris
 ```
 
-**Quick check (any OS)**
+### Quick check (any OS)
 ```r
 library(Volaris)
 bs_price(100, 100, 1.0, 0.05, 0.2, 1L)  # ~10.45
