@@ -58,8 +58,11 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Files for benchmarking the most important Volaris funcitonalities.
-- Entirety of README text.
+- Entirety of the README text.
+- Handling of GitHub Pages.
 
 ### Modified
 
 - Some minor changes (e.g. compilation flags) and optimizations in the source code. No functionalities has been modified, lost or added.
+- Workflows for CI/CD.
+- R as something self-complementary: copied the `src/` code to the `R/Volaris/src/` catalogue. Necessary for `check_win_devel()`.

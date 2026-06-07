@@ -30,6 +30,6 @@ Returns a numeric scalar in the range (0, +inf) representing the price of the op
 Computes the theoretical price of an Asian option using Monte Carlo based on the analysis of the arithmetic average price
 }
 \examples{
-mc_price_asian(100, 100, 1, 0.05, 0.2, 10000, 252, 1)
-stopifnot(mc_price_asian(100, 100, 1, 0.05, 0.2, 1000, 52, 1) < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
+asian <- mc_price_asian(100, 100, 1, 0.05, 0.2, 1000, 52, 1)
+stopifnot(asian < mc_price_european(100, 100, 1, 0.05, 0.2, 1000, 1)[1])
 }

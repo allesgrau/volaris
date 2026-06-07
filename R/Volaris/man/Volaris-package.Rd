@@ -3,11 +3,24 @@
 \docType{package}
 \name{Volaris-package}
 \alias{Volaris-package}
-\title{Volaris: High-performance library for quantitative finance}
+\title{Volaris: High-Performance Library for Quantitative Finance}
 \description{
 Fast derivatives pricing, volatility estimation, stochastic simulation, and numerical computation through a compiled C/C++ backend.
 
 Fast derivatives pricing, volatility estimation, stochastic simulation, and numerical computation through a compiled C/C++ backend.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://allesgrau.github.io/volaris/}
+}
+
+
+Useful links:
+\itemize{
+  \item \url{https://allesgrau.github.io/volaris/}
+}
+
 }
 \author{
 \strong{Maintainer}: Barbara Gawlik \email{basia.m.gawlik@gmail.com}

@@ -14,12 +14,15 @@ template:
 
 navbar:
   structure:
-    left: [intro, gettingstarted, reference]
+    left: [intro, gettingstarted, examples, reference]
     right: [search, github]
   components:
     gettingstarted:
       text: Getting started
       href: articles/installation.html
+    examples:
+      text: Examples
+      href: articles/notebooks.html
     github:
       icon: fab fa-github
       href: https://github.com/allesgrau/volaris
@@ -28,6 +31,7 @@ articles:
   - title: ~
     contents:
     - installation
+    - articles/notebooks
 
 reference:
 
@@ -73,4 +77,3 @@ reference:
   - title: Package
     contents:
     - Volaris-package
-  
