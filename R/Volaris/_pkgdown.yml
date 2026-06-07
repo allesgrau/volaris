@@ -53,3 +53,8 @@ reference:
     - rootfind_bisect
     - integrate_gauss
     - integrate_gsl
+
+  - title: Package
+    contents:
+    - Volaris-package
+  
