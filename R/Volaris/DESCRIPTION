@@ -1,7 +1,7 @@
 Package: Volaris
 Version: 1.0.0
 Date: 2026-06-05
-Title: High-Performance Library For Quantitative Finance
+Title: High-Performance Library for Quantitative Finance
 Description: Fast derivatives pricing, volatility estimation, stochastic simulation, and numerical computation through a compiled C/C++ backend.
 Authors@R: c(person("Barbara", "Gawlik", role = c("aut", "cre"),
                      email = "basia.m.gawlik@gmail.com"))

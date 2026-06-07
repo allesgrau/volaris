@@ -1,8 +1,6 @@
 #include <Rcpp.h>
-#include "../../../src/pricing/heston.hpp"
-#include "../../../src/pricing/heston.cpp"
-#include "../../../src/volatility/garch.hpp"
-#include "../../../src/volatility/garch.cpp"
+#include "heston.hpp"
+#include "garch.hpp"
 
 using namespace Rcpp;
 using namespace volaris;

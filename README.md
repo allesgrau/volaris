@@ -33,19 +33,22 @@ volaris/
 │   ├── numerical/                  #   Root-finding, Integration
 │   └── utils/                      #   LCG random number generator
 │
-├── python/                         # Python package (Cython bindings)
+├── python/                         # Python package
 │   ├── volaris/
 │   │   ├── _core.pyx               #   Cython wrapper (C modules)
 │   │   └── _heston_garch.pyx       #   Cython wrapper (C++ modules)
 │   ├── tests/
 │   └── pyproject.toml
 │
-├── R/Volaris/                      # R package (R/C API and Rcpp bindings)
-│   ├── R/
-│   ├── src/
-│   │   ├── volaris_r.c             #   R/C API wrapper (C modules)
-│   │   └── heston_garch_rcpp.cpp   #   Rcpp wrapper (C++ modules)
+├── R/Volaris/                      # R package
+│   ├── R/                          #   R wrapper functions
+│   ├── src/                        #   C/C++ sources (copy from src/) + R wrappers
+│   │   ├── volaris_r.c             #     R/C API wrapper (C modules)
+│   │   └── heston_garch_rcpp.cpp   #     Rcpp wrapper (C++ modules)
+|   ├── man/                        #   Roxygen2-generated documentation
+|   ├── vignettes/                  #   Getting-started guide
 │   ├── tests/
+|   ├── _pkgdown.yml                #   pkgdown site configuration
 │   └── DESCRIPTION
 │
 ├── notebooks/                      # Jupyter notebooks with usage examples

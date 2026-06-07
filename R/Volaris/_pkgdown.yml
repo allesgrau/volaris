@@ -6,20 +6,23 @@ template:
   includes:
     in_header: |
       <style>
-      .navbar-brand img { height: 80px !important; }
+      .navbar-brand img { height: 150px !important; }
       </style>
 
 navbar:
   structure:
-    left: [intro, articles, reference]
+    left: [intro, gettingstarted, reference]
     right: [search, github]
   components:
+    gettingstarted:
+      text: Getting started
+      href: articles/installation.html
     github:
       icon: fab fa-github
       href: https://github.com/allesgrau/volaris
 
 articles:
-  - title: "Getting started"
+  - title: ~
     contents:
     - installation
 

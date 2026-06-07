@@ -1,17 +1,17 @@
 #define R_NO_REMAP
 #include <R.h>
 #include <Rinternals.h>
-#include "../../../src/utils/lcg.c"
-#include "../../../src/pricing/black_scholes.c"
-#include "../../../src/pricing/binomial_tree.c"
-#include "../../../src/pricing/monte_carlo.c"
-#include "../../../src/volatility/historical_vol.c"
-#include "../../../src/volatility/implied_vol.c"
-#include "../../../src/simulation/gbm.c"
-#include "../../../src/simulation/mcmc.c"
-#include "../../../src/simulation/jump_diffusion.c"
-#include "../../../src/numerical/rootfind.c"
-#include "../../../src/numerical/integrate.c"
+#include "lcg.h"
+#include "black_scholes.h"
+#include "binomial_tree.h"
+#include "monte_carlo.h"
+#include "historical_vol.h"
+#include "implied_vol.h"
+#include "gbm.h"
+#include "mcmc.h"
+#include "jump_diffusion.h"
+#include "rootfind.h"
+#include "integrate.h"
 
 
 SEXP r_bs_price(SEXP S, SEXP K, SEXP T, SEXP r, SEXP sigma, SEXP is_call)
