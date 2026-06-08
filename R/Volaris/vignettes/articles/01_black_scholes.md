@@ -1,6 +1,5 @@
 # Options pricing with Black-Scholes
 This notebook demonstrates a selection of capabilities of the **Volaris** library:
-
 - option pricing with the Black-Scholes model
 - Greeks calculation: delta, gamma, vega, theta, rho
 - fast root-finding and numerical integration through a compiled C core
@@ -31,7 +30,6 @@ S, K, T, r, sigma = 100.0, 100.0, 1.0, 0.05, 0.20
 The Black-Scholes model assumes the underlying option follows Geometric Brownian Motion.
 
 Variables used:
-
 | Symbol | Meaning | Example value |
 |--------|---------|---------------|
 | S | current price of the underlying asset | 100.0 |

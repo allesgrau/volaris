@@ -1,5 +1,5 @@
 ---
-title: "Notebooks"
+title: "Examples (Python)"
 ---
 
 ```{r child = "01_black_scholes.md"}

@@ -1,0 +1,6 @@
+---
+title: "Examples (R)"
+---
+
+```{r child = "01_black_scholes_r.md"}
+```

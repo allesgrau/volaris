@@ -35,6 +35,11 @@ def test_rootfind_bisect_sin_pi():
 def test_rootfind_bisect_bad_bracket_returns_nan():
     assert math.isnan(rootfind_bisect(lambda x: x*x + 1, a=-2.0, b=2.0))
 
+def test_rootfind_newton_bisect_agree():
+    f = lambda x: x**3 - 2*x - 5
+    df = lambda x: 3*x**2 - 2
+    assert abs(rootfind_newton(f, df, x0=2.0) - rootfind_bisect(f, a=2.0, b=3.0)) < 1e-6
+
 
 # Find an integral
 
@@ -56,3 +61,13 @@ def test_integrate_gsl_sin():
 def test_integrate_gsl_agrees_with_gauss():
     f = lambda x: math.exp(-x * x)
     assert abs(integrate_gauss(f, 0.0, 3.0, n_points=30) - integrate_gsl(f, 0.0, 3.0)) < 1e-6
+
+def test_integrate_gauss_more_points_improves_accuracy():
+    f = lambda x: math.sin(5*x) * math.exp(-x)
+    ref = integrate_gsl(f, 0.0, math.pi)
+    err5 = abs(integrate_gauss(f, 0.0, math.pi, n_points=5) - ref)
+    err30 = abs(integrate_gauss(f, 0.0, math.pi, n_points=30) - ref)
+    assert err30 < err5
+
+def test_integrate_gsl_exp():
+    assert abs(integrate_gsl(math.exp, 0.0, 1.0) - (math.e - 1)) < 1e-8

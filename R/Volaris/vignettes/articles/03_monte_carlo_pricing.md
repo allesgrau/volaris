@@ -1,7 +1,6 @@
 # Monte Carlo pricing & stochastic simulations
 
 This notebook demonstrates a selection of capabilities of the **Volaris** library:
-
 - European, Asian, and barrier option pricing via Monte Carlo simulation
 - GBM path simulation with antithetic variates for variance reduction
 - Merton jump-diffusion model (GBM + compound Poisson jumps)
@@ -97,12 +96,12 @@ print(f"Up-and-in call:   {knockin:.4f}")
 print(f"\nKnock-out + knock-in = {knockout + knockin:.4f}  (should more-less equal European = {european:.4f})")
 ```
 
-    European call:    10.4207
-    Asian call:       5.8314
-    Up-and-out call:  1.3488
-    Up-and-in call:   9.1639
+    European call:    10.5372
+    Asian call:       5.7724
+    Up-and-out call:  1.3518
+    Up-and-in call:   9.1257
     
-    Knock-out + knock-in = 10.5127  (should more-less equal European = 10.4207)
+    Knock-out + knock-in = 10.4775  (should more-less equal European = 10.5372)
     
 
 ---
@@ -154,7 +153,6 @@ plt.show()
 The Merton model extends GBM by adding compound Poisson jumps: sudden large moves that GBM cannot capture.
 
 Parameters:
-
 | Symbol | Meaning |
 |--------|---------|
 | lambda | expected number of jumps per year |
@@ -236,7 +234,7 @@ forecast = garch_forecast(params['omega'], params['alpha'], params['beta'], retu
 ```
 
     True:      omega=0.000100 | alpha=0.100000 | beta=0.850000
-    Fitted:    omega=0.000087 | alpha=0.077514 | beta=0.878238
+    Fitted:    omega=0.000087 | alpha=0.077490 | beta=0.878328
     
 
 

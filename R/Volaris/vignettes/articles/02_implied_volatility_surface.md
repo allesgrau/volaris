@@ -1,7 +1,6 @@
 # Implied volatility surface & volatility calculation
 
 This notebook demonstrates a selection of capabilities of the **Volaris** library through:
-
 - finding the implied volatility smile and surface via Black-Scholes model inversion
 - volatility calculation: Close-to-Close, Parkinson, Garman-Klass, Yang-Zhang estimators
 - comparison of estimator efficiency on simulated OHLC data
@@ -21,7 +20,7 @@ from volaris import (
 )
 
 S, r, sigma = 100.0, 0.05, 0.20
-rng = np.random.default_rng(42)
+rng = np.random.default_rng(123)
 ```
 
 ---
@@ -172,10 +171,10 @@ print(f"Yang-Zhang:     {yz:.4f}")
 
     True sigma:     0.2000
     ---------------
-    Close-to-Close: 0.1970
-    Parkinson:      0.1866
-    Garman-Klass:   0.1831
-    Yang-Zhang:     0.1871
+    Close-to-Close: 0.1855
+    Parkinson:      0.1780
+    Garman-Klass:   0.1756
+    Yang-Zhang:     0.1789
     
 
 ---

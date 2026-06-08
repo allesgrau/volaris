@@ -12,7 +12,7 @@ void mh_sampler(log_posterior_t log_post, const double *theta_init, int n_params
     for (size_t j=0; j<(size_t)n_params; ++j)
         theta[j] = theta_init[j];
 
-    unsigned long long rng = 123456789ULL;
+    unsigned long long rng = 2654435761ULL;
     double log_p = log_post.fn(theta, n_params, log_post.data);
     int out_idx  = 0;
 

@@ -1,9 +1,6 @@
 #include <math.h>
 
-#define PI 3.14159265358979323846
 
-
-// :D
 double lcg_uniform(unsigned long long *state) {
     *state = *state * 6364136223846793005ULL + 1442695040888963407ULL;
     return (double)(*state >> 11) / (double)(1ULL << 53);

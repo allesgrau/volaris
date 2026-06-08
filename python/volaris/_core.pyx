@@ -38,8 +38,8 @@ cdef extern from "rootfind.h":
     double  c_rootfind_bisect   "rootfind_bisect"   (double (*f)(double), double a, double b, double tol, int max_iter)
 
 cdef extern from "integrate.h":
-    double  c_integrate_gauss   "integrate_gauss"   (double (*f)(double, void *), double a, double b, int n_points, void *params)
-    double  c_integrate_gsl     "integrate_gsl"     (double (*f)(double, void *), double a, double b, double tol, void *params)
+    double  c_integrate_gauss   "integrate_gauss"   (double (*f)(double, void *), double a, double b, int n_points)
+    double  c_integrate_gsl     "integrate_gsl"     (double (*f)(double, void *), double a, double b, double tol)
 
 
 def bs_price(double S, double K, double T, double r, double sigma, int is_call):
@@ -713,8 +713,10 @@ def rootfind_bisect(f, double a, double b, double tol=1e-10, int max_iter=1000):
     return c_rootfind_bisect(_rf_f, a, b, tol, max_iter)
 
 
-cdef double _scalar(double x, void *params) noexcept:
-    return (<object>params)(x)
+cdef object integrand_func
+
+cdef double _r_integr(double x, void *params) noexcept:
+    return integrand_func(x)
 
 
 def integrate_gauss(f, double a, double b, int n_points=10):
@@ -741,7 +743,9 @@ def integrate_gauss(f, double a, double b, int n_points=10):
     0.3333333333333333
     """
 
-    return c_integrate_gauss(_scalar, a, b, n_points, <void *>f)
+    global integrand_func
+    integrand_func = f
+    return c_integrate_gauss(_r_integr, a, b, n_points)
 
 
 def integrate_gsl(f, double a, double b, double tol=1e-8):
@@ -768,4 +772,6 @@ def integrate_gsl(f, double a, double b, double tol=1e-8):
     0.3333333333333333
     """
     
-    return c_integrate_gsl(_scalar, a, b, tol, <void *>f)
+    global integrand_func
+    integrand_func = f
+    return c_integrate_gsl(_r_integr, a, b, tol)

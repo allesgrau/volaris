@@ -22,7 +22,11 @@ navbar:
       href: articles/installation.html
     examples:
       text: Examples
-      href: articles/notebooks.html
+      menu:
+      - text: Python
+        href: articles/notebooks_py.html
+      - text: R
+        href: articles/notebooks_r.html
     github:
       icon: fab fa-github
       href: https://github.com/allesgrau/volaris
@@ -31,7 +35,8 @@ articles:
   - title: ~
     contents:
     - installation
-    - articles/notebooks
+    - articles/notebooks_py
+    - articles/notebooks_r
 
 reference:
 

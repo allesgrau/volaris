@@ -87,6 +87,12 @@ test_that("American put >= European put", {
   expect_gte(binomial_price(S, K, T, r, q, sigma, 200, 0, 1), binomial_price(S, K, T, r, q, sigma, 200, 0, 0))
 })
 
+test_that("binomial put-call parity holds (European)", {
+  call <- binomial_price(S, K, T, r, q, sigma, 500, 1, 0)
+  put <- binomial_price(S, K, T, r, q, sigma, 500, 0, 0)
+  expect_lt(abs(call - put - (S - K * exp(-r * T))), 0.1)
+})
+
 
 # Heston
 

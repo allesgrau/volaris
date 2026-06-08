@@ -66,3 +66,14 @@ All notable changes to this project will be documented in this file.
 - Some minor changes (e.g. compilation flags) and optimizations in the source code. No functionalities has been modified, lost or added.
 - Workflows for CI/CD.
 - R as something self-complementary: copied the `src/` code to the `R/Volaris/src/` catalogue. Necessary for `check_win_devel()`.
+
+## [1.0.2] – 2026-06-09
+
+### Modified
+
+- Source code to make it better structured and less chaotic. No functionalities has been modified, lost or added.
+- Modifications necessary for final release.
+
+### Added
+
+- A notebook showcasing the use of Volaris in R.

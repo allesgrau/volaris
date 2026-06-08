@@ -327,15 +327,13 @@ SEXP r_rootfind_bisect(SEXP f, SEXP a, SEXP b, SEXP tol, SEXP max_iter)
 }
 
 
-typedef struct { 
-    SEXP fn; 
-} r_scalar_ctx;
+static SEXP _r_integrand_fn = NULL;
 
-static double _r_scalar_f(double x, void *params)
+static double _r_integr(double x, void *params)
 {
-    SEXP fn = ((r_scalar_ctx *)params)->fn;
+    (void)params;
     SEXP arg = PROTECT(Rf_ScalarReal(x));
-    SEXP call = PROTECT(Rf_lang2(fn, arg));
+    SEXP call = PROTECT(Rf_lang2(_r_integrand_fn, arg));
     SEXP res = PROTECT(Rf_eval(call, R_GlobalEnv));
     double val = REAL(res)[0];
     UNPROTECT(3);
@@ -345,15 +343,15 @@ static double _r_scalar_f(double x, void *params)
 
 SEXP r_integrate_gauss(SEXP f, SEXP a, SEXP b, SEXP n_points)
 {
-    r_scalar_ctx ctx = { f };
-    double result = integrate_gauss(_r_scalar_f, REAL(a)[0], REAL(b)[0], INTEGER(n_points)[0], &ctx);
+    _r_integrand_fn = f;
+    double result = integrate_gauss(_r_integr, REAL(a)[0], REAL(b)[0], INTEGER(n_points)[0]);
     return Rf_ScalarReal(result);
 }
 
 
 SEXP r_integrate_gsl(SEXP f, SEXP a, SEXP b, SEXP tol)
 {
-    r_scalar_ctx ctx = { f };
-    double result = integrate_gsl(_r_scalar_f, REAL(a)[0], REAL(b)[0], REAL(tol)[0], &ctx);
+    _r_integrand_fn = f;
+    double result = integrate_gsl(_r_integr, REAL(a)[0], REAL(b)[0], REAL(tol)[0]);
     return Rf_ScalarReal(result);
 }

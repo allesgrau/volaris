@@ -7,7 +7,7 @@ from scipy.integrate import quad
 import volaris
 
 
-RNG = np.random.default_rng(42)
+RNG = np.random.default_rng(123)
 REPS = 5
 
 def bench(fn, reps=REPS, number=1):
