@@ -7,14 +7,21 @@ Whether you are pricing derivatives, fitting volatility models, or
 running Monte Carlo simulations, Volaris gives you C-speed without
 leaving Python or R.
 
-If you want a hands-on introduction to these topics, check out the
-[Examples](https://allesgrau.github.io/volaris/articles/notebooks.html)
-tab on the GitHub Pages project website for worked examples.
-
 Available as:
 
 - **Python package** – `volaris` (`python/`)
 - **R package** – `Volaris` (`R/Volaris/`)
+
+Rendered example notebooks are available on the [project
+site](https://allesgrau.github.io/volaris/): - **Python** –
+Black-Scholes, implied volatility, Monte Carlo pricing – [Examples
+(Python)](https://allesgrau.github.io/volaris/articles/notebooks_py.html) -
+**R** – Black-Scholes pricing – [Examples
+(R)](https://allesgrau.github.io/volaris/articles/notebooks_r.html)
+
+Source notebooks live in
+[`notebooks/`](https://allesgrau.github.io/volaris/notebooks/)
+(`*.ipynb` for Python, `*_r.ipynb` for R).
 
 ------------------------------------------------------------------------
 
@@ -109,48 +116,30 @@ Benchmarked on Windows 11, Python 3.12, NumPy 2.x, and R 4.5.0.
 
 | Function | Volaris | NumPy / SciPy | Speedup |
 |----|---:|---:|---:|
-| `binomial_price` with N=400 | 0.1 ms | 3.9 ms | **36.6x** |
-| `mc_price_european` with 100,000 paths | 3.5 ms | 6.3 ms | **1.8x** |
-| `hist_vol_close_to_close` with n=10,000 | \<0.1 ms | 0.1 ms | **13.9x** |
-| `implied_vol` x 10,000 calls | 12.0 ms | 25 933 ms | **2,169x** |
-| `gbm_paths` with 10,000 paths and 252 steps | 56.3 ms | 146.9 ms | **2.6x** |
-| `mh_sampler_gbm` with 10,000 iterations | 2.1 ms | 271.5 ms | **127x** |
-| `rootfind_newton` x 10,000 calls | 12.2 ms | 1 893 ms | **155x** |
-| `integrate_gauss` x 10,000 calls | 188.7 ms | 495.9 ms | **2.6x** |
-| `garch_fit` with n=1,000 returns | 1.1 ms | 950.0 ms | **844x** |
+| `binomial_price` with N=400 | 0.1 ms | 2.4 ms | **36.8x** |
+| `mc_price_european` with 100,000 paths | 1.9 ms | 3.9 ms | **2.0x** |
+| `hist_vol_close_to_close` with n=10,000 | \<0.1 ms | 0.1 ms | **14.1x** |
+| `implied_vol` x 10,000 calls | 9.2 ms | 11 724 ms | **1,274x** |
+| `gbm_paths` with 10,000 paths and 252 steps | 28.1 ms | 79.5 ms | **2.8x** |
+| `mh_sampler_gbm` with 10,000 iterations | 1.1 ms | 115.9 ms | **108x** |
+| `rootfind_newton` x 10,000 calls | 5.4 ms | 854.3 ms | **157x** |
+| `integrate_gauss` x 10,000 calls | 87.8 ms | 223.1 ms | **2.5x** |
 
 **R**
 
-| Function                                    |  Volaris |          R |   Speedup |
-|---------------------------------------------|---------:|-----------:|----------:|
-| `binomial_price` with N=400                 |  0.10 ms |    2.55 ms | **25.4x** |
-| `mc_price_european` with 100,000 paths      |   5.2 ms |    19.3 ms |  **3.7x** |
-| `vol_close_to_close` with n=10,000          |  0.03 ms |    0.13 ms |  **3.7x** |
-| `implied_vol` x 10,000 calls                |  56.6 ms | 1 401.6 ms | **24.7x** |
-| `gbm_paths` with 10,000 paths and 252 steps | 139.5 ms |   606.0 ms |  **4.3x** |
-| `mh_sampler_gbm` with 10,000 iterations     |   9.2 ms |    87.4 ms |  **9.5x** |
-| `rootfind_newton` x 10,000 calls            |  84.9 ms |   728.3 ms |  **8.6x** |
-| `integrate_gauss` x 10,000 calls            | 120.5 ms |   351.6 ms |  **2.9x** |
-| `garch_fit` with n=1,000 returns            |  10.6 ms |     1.6 ms |    *0.1x* |
+| Function                                    | Volaris |        R |   Speedup |
+|---------------------------------------------|--------:|---------:|----------:|
+| `binomial_price` with N=400                 | 0.08 ms |   2.4 ms | **30.0x** |
+| `mc_price_european` with 100,000 paths      |  2.8 ms |  12.2 ms |  **4.4x** |
+| `vol_close_to_close` with n=10,000          | 0.02 ms |  0.07 ms |  **3.7x** |
+| `implied_vol` x 10,000 calls                | 31.1 ms | 761.5 ms | **24.5x** |
+| `gbm_paths` with 10,000 paths and 252 steps | 89.8 ms | 384.9 ms |  **4.3x** |
+| `mh_sampler_gbm` with 10,000 iterations     |  4.7 ms |  75.4 ms | **16.1x** |
+| `rootfind_newton` x 10,000 calls            | 60.9 ms | 522.3 ms |  **8.6x** |
+| `integrate_gauss` x 10,000 calls            | 63.8 ms | 215.2 ms |  **3.4x** |
 
-*`garch_fit` is faster, because R 4.x compiles the inner loop on the
-fly, making the sequential GARCH recurrence nearly as fast as C. The
-sequential dependency prevents vectorisation in either implementation.*
-
-------------------------------------------------------------------------
-
-## Usage examples
-
-See the
-[Examples](https://allesgrau.github.io/volaris/articles/notebooks.html)
-tab on the GitHub Pages project website for full worked examples:
-
-- `notebooks/01_black_scholes.ipynb` – option pricing with Black-Scholes
-  and a Binomial Tree
-- `notebooks/02_implied_volatility_surface.ipynb` – volatility surface
-  construction
-- `notebooks/03_monte_carlo_pricing.ipynb` – Monte Carlo for pricing
-  exotic options
+*The benchmark covers only a selection of the most important
+functionalities of Volaris.*
 
 ------------------------------------------------------------------------
 

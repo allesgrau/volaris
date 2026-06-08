@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">Volaris</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,13 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="articles/installation.html">Getting started</a></li>
-<li class="nav-item"><a class="nav-link" href="articles/notebooks.html">Examples</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-examples" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Examples</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-examples">
+<li><a class="dropdown-item" href="articles/notebooks_py.html">Python</a></li>
+    <li><a class="dropdown-item" href="articles/notebooks_r.html">R</a></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -60,7 +66,6 @@
 </h1>
 </div>
 <p>Volaris is a high-performance library for quantitative finance – option pricing, volatility estimation, stochastic simulation, and numerical methods, with a compiled C/C++ backend shared between Python and R. Whether you are pricing derivatives, fitting volatility models, or running Monte Carlo simulations, Volaris gives you C-speed without leaving Python or R.</p>
-<p>If you want a hands-on introduction to these topics, check out the <a href="https://allesgrau.github.io/volaris/articles/notebooks.html">Examples</a> tab on the GitHub Pages project website for worked examples.</p>
 <p>Available as:</p>
 <ul>
 <li>
@@ -68,6 +73,8 @@
 <li>
 <strong>R package</strong> – <code>Volaris</code> (<code>R/Volaris/</code>)</li>
 </ul>
+<p>Rendered example notebooks are available on the <a href="https://allesgrau.github.io/volaris/">project site</a>: - <strong>Python</strong> – Black-Scholes, implied volatility, Monte Carlo pricing – <a href="https://allesgrau.github.io/volaris/articles/notebooks_py.html">Examples (Python)</a> - <strong>R</strong> – Black-Scholes pricing – <a href="https://allesgrau.github.io/volaris/articles/notebooks_r.html">Examples (R)</a></p>
+<p>Source notebooks live in <a href="notebooks/"><code>notebooks/</code></a> (<code>*.ipynb</code> for Python, <code>*_r.ipynb</code> for R).</p>
 <hr>
 <div class="section level2">
 <h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
@@ -192,64 +199,57 @@
 <td>
 <code>binomial_price</code> with N=400</td>
 <td align="right">0.1 ms</td>
-<td align="right">3.9 ms</td>
-<td align="right"><strong>36.6x</strong></td>
+<td align="right">2.4 ms</td>
+<td align="right"><strong>36.8x</strong></td>
 </tr>
 <tr>
 <td>
 <code>mc_price_european</code> with 100,000 paths</td>
-<td align="right">3.5 ms</td>
-<td align="right">6.3 ms</td>
-<td align="right"><strong>1.8x</strong></td>
+<td align="right">1.9 ms</td>
+<td align="right">3.9 ms</td>
+<td align="right"><strong>2.0x</strong></td>
 </tr>
 <tr>
 <td>
 <code>hist_vol_close_to_close</code> with n=10,000</td>
 <td align="right">&lt;0.1 ms</td>
 <td align="right">0.1 ms</td>
-<td align="right"><strong>13.9x</strong></td>
+<td align="right"><strong>14.1x</strong></td>
 </tr>
 <tr>
 <td>
 <code>implied_vol</code> x 10,000 calls</td>
-<td align="right">12.0 ms</td>
-<td align="right">25 933 ms</td>
-<td align="right"><strong>2,169x</strong></td>
+<td align="right">9.2 ms</td>
+<td align="right">11 724 ms</td>
+<td align="right"><strong>1,274x</strong></td>
 </tr>
 <tr>
 <td>
 <code>gbm_paths</code> with 10,000 paths and 252 steps</td>
-<td align="right">56.3 ms</td>
-<td align="right">146.9 ms</td>
-<td align="right"><strong>2.6x</strong></td>
+<td align="right">28.1 ms</td>
+<td align="right">79.5 ms</td>
+<td align="right"><strong>2.8x</strong></td>
 </tr>
 <tr>
 <td>
 <code>mh_sampler_gbm</code> with 10,000 iterations</td>
-<td align="right">2.1 ms</td>
-<td align="right">271.5 ms</td>
-<td align="right"><strong>127x</strong></td>
+<td align="right">1.1 ms</td>
+<td align="right">115.9 ms</td>
+<td align="right"><strong>108x</strong></td>
 </tr>
 <tr>
 <td>
 <code>rootfind_newton</code> x 10,000 calls</td>
-<td align="right">12.2 ms</td>
-<td align="right">1 893 ms</td>
-<td align="right"><strong>155x</strong></td>
+<td align="right">5.4 ms</td>
+<td align="right">854.3 ms</td>
+<td align="right"><strong>157x</strong></td>
 </tr>
 <tr>
 <td>
 <code>integrate_gauss</code> x 10,000 calls</td>
-<td align="right">188.7 ms</td>
-<td align="right">495.9 ms</td>
-<td align="right"><strong>2.6x</strong></td>
-</tr>
-<tr>
-<td>
-<code>garch_fit</code> with n=1,000 returns</td>
-<td align="right">1.1 ms</td>
-<td align="right">950.0 ms</td>
-<td align="right"><strong>844x</strong></td>
+<td align="right">87.8 ms</td>
+<td align="right">223.1 ms</td>
+<td align="right"><strong>2.5x</strong></td>
 </tr>
 </tbody>
 </table>
@@ -271,83 +271,62 @@
 <tr>
 <td>
 <code>binomial_price</code> with N=400</td>
-<td align="right">0.10 ms</td>
-<td align="right">2.55 ms</td>
-<td align="right"><strong>25.4x</strong></td>
+<td align="right">0.08 ms</td>
+<td align="right">2.4 ms</td>
+<td align="right"><strong>30.0x</strong></td>
 </tr>
 <tr>
 <td>
 <code>mc_price_european</code> with 100,000 paths</td>
-<td align="right">5.2 ms</td>
-<td align="right">19.3 ms</td>
-<td align="right"><strong>3.7x</strong></td>
+<td align="right">2.8 ms</td>
+<td align="right">12.2 ms</td>
+<td align="right"><strong>4.4x</strong></td>
 </tr>
 <tr>
 <td>
 <code>vol_close_to_close</code> with n=10,000</td>
-<td align="right">0.03 ms</td>
-<td align="right">0.13 ms</td>
+<td align="right">0.02 ms</td>
+<td align="right">0.07 ms</td>
 <td align="right"><strong>3.7x</strong></td>
 </tr>
 <tr>
 <td>
 <code>implied_vol</code> x 10,000 calls</td>
-<td align="right">56.6 ms</td>
-<td align="right">1 401.6 ms</td>
-<td align="right"><strong>24.7x</strong></td>
+<td align="right">31.1 ms</td>
+<td align="right">761.5 ms</td>
+<td align="right"><strong>24.5x</strong></td>
 </tr>
 <tr>
 <td>
 <code>gbm_paths</code> with 10,000 paths and 252 steps</td>
-<td align="right">139.5 ms</td>
-<td align="right">606.0 ms</td>
+<td align="right">89.8 ms</td>
+<td align="right">384.9 ms</td>
 <td align="right"><strong>4.3x</strong></td>
 </tr>
 <tr>
 <td>
 <code>mh_sampler_gbm</code> with 10,000 iterations</td>
-<td align="right">9.2 ms</td>
-<td align="right">87.4 ms</td>
-<td align="right"><strong>9.5x</strong></td>
+<td align="right">4.7 ms</td>
+<td align="right">75.4 ms</td>
+<td align="right"><strong>16.1x</strong></td>
 </tr>
 <tr>
 <td>
 <code>rootfind_newton</code> x 10,000 calls</td>
-<td align="right">84.9 ms</td>
-<td align="right">728.3 ms</td>
+<td align="right">60.9 ms</td>
+<td align="right">522.3 ms</td>
 <td align="right"><strong>8.6x</strong></td>
 </tr>
 <tr>
 <td>
 <code>integrate_gauss</code> x 10,000 calls</td>
-<td align="right">120.5 ms</td>
-<td align="right">351.6 ms</td>
-<td align="right"><strong>2.9x</strong></td>
-</tr>
-<tr>
-<td>
-<code>garch_fit</code> with n=1,000 returns</td>
-<td align="right">10.6 ms</td>
-<td align="right">1.6 ms</td>
-<td align="right"><em>0.1x</em></td>
+<td align="right">63.8 ms</td>
+<td align="right">215.2 ms</td>
+<td align="right"><strong>3.4x</strong></td>
 </tr>
 </tbody>
 </table>
-<p><em><code>garch_fit</code> is faster, because R 4.x compiles the inner loop on the fly, making the sequential GARCH recurrence nearly as fast as C. The sequential dependency prevents vectorisation in either implementation.</em></p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="usage-examples">Usage examples<a class="anchor" aria-label="anchor" href="#usage-examples"></a>
-</h2>
-<p>See the <a href="https://allesgrau.github.io/volaris/articles/notebooks.html">Examples</a> tab on the GitHub Pages project website for full worked examples:</p>
-<ul>
-<li>
-<code>notebooks/01_black_scholes.ipynb</code> – option pricing with Black-Scholes and a Binomial Tree</li>
-<li>
-<code>notebooks/02_implied_volatility_surface.ipynb</code> – volatility surface construction</li>
-<li>
-<code>notebooks/03_monte_carlo_pricing.ipynb</code> – Monte Carlo for pricing exotic options</li>
-</ul>
+<p><em>The benchmark covers only a selection of the most important functionalities of Volaris.</em></p>
 <hr>
 </div>
 <div class="section level2">
