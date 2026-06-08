@@ -75,10 +75,14 @@
 <h2 id="options-pricing-with-black-scholes">Options pricing with Black-Scholes<a class="anchor" aria-label="anchor" href="#options-pricing-with-black-scholes"></a>
 </h2>
 <p>This notebook demonstrates a selection of capabilities of the
-<strong>Volaris</strong> library: - option pricing with the
-Black-Scholes model - Greeks calculation: delta, gamma, vega, theta, rho
-- fast root-finding and numerical integration through a compiled C core
-- binomial tree as a discrete alternative to Black-Scholes</p>
+<strong>Volaris</strong> library:</p>
+<ul>
+<li>option pricing with the Black-Scholes model</li>
+<li>Greeks calculation: delta, gamma, vega, theta, rho</li>
+<li>fast root-finding and numerical integration through a compiled C
+core</li>
+<li>binomial tree as a discrete alternative to Black-Scholes</li>
+</ul>
 <hr>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://allesgrau.github.io/volaris/">Volaris</a></span><span class="op">)</span></span>
@@ -89,13 +93,51 @@ Black-Scholes model - Greeks calculation: delta, gamma, vega, theta, rho
 </h3>
 <p>The Black-Scholes model assumes the underlying option follows
 Geometric Brownian Motion.</p>
-<p>Variables used: | Symbol | Meaning | Example value | |——–|———|—————|
-| S | current price of the underlying asset | 100.0 | | K | strike price
-(exercise price of the option) | 100.0 | | T | time to expiration in
-years | 1.0 (= 1 year) | | r | risk-free interest rate (annualised) |
-0.05 (= 5%) | | sigma | volatility of the underlying (annualised) | 0.20
-(= 20%) | | C | call option price: right to buy at K | computed | | P |
-put option price: right to sell at K | computed |</p>
+<p>Variables used:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+<th>Example value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>S</td>
+<td>current price of the underlying asset</td>
+<td>100.0</td>
+</tr>
+<tr class="even">
+<td>K</td>
+<td>strike price (exercise price of the option)</td>
+<td>100.0</td>
+</tr>
+<tr class="odd">
+<td>T</td>
+<td>time to expiration in years</td>
+<td>1.0 (= 1 year)</td>
+</tr>
+<tr class="even">
+<td>r</td>
+<td>risk-free interest rate (annualised)</td>
+<td>0.05 (= 5%)</td>
+</tr>
+<tr class="odd">
+<td>sigma</td>
+<td>volatility of the underlying (annualised)</td>
+<td>0.20 (= 20%)</td>
+</tr>
+<tr class="even">
+<td>C</td>
+<td>call option price: right to buy at K</td>
+<td>computed</td>
+</tr>
+<tr class="odd">
+<td>P</td>
+<td>put option price: right to sell at K</td>
+<td>computed</td>
+</tr>
+</tbody>
+</table>
 <p>Call and put prices for an at-the-money option, verified via put-call
 parity:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">

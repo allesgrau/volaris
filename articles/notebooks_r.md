@@ -3,10 +3,12 @@
 ## Options pricing with Black-Scholes
 
 This notebook demonstrates a selection of capabilities of the
-**Volaris** library: - option pricing with the Black-Scholes model -
-Greeks calculation: delta, gamma, vega, theta, rho - fast root-finding
-and numerical integration through a compiled C core - binomial tree as a
-discrete alternative to Black-Scholes
+**Volaris** library:
+
+- option pricing with the Black-Scholes model
+- Greeks calculation: delta, gamma, vega, theta, rho
+- fast root-finding and numerical integration through a compiled C core
+- binomial tree as a discrete alternative to Black-Scholes
 
 ------------------------------------------------------------------------
 
@@ -23,14 +25,17 @@ S <- 100.0; K <- 100.0; T <- 1.0; r <- 0.05; sigma <- 0.20
 The Black-Scholes model assumes the underlying option follows Geometric
 Brownian Motion.
 
-Variables used: \| Symbol \| Meaning \| Example value \|
-\|——–\|———\|—————\| \| S \| current price of the underlying asset \|
-100.0 \| \| K \| strike price (exercise price of the option) \| 100.0 \|
-\| T \| time to expiration in years \| 1.0 (= 1 year) \| \| r \|
-risk-free interest rate (annualised) \| 0.05 (= 5%) \| \| sigma \|
-volatility of the underlying (annualised) \| 0.20 (= 20%) \| \| C \|
-call option price: right to buy at K \| computed \| \| P \| put option
-price: right to sell at K \| computed \|
+Variables used:
+
+| Symbol | Meaning                                     | Example value  |
+|--------|---------------------------------------------|----------------|
+| S      | current price of the underlying asset       | 100.0          |
+| K      | strike price (exercise price of the option) | 100.0          |
+| T      | time to expiration in years                 | 1.0 (= 1 year) |
+| r      | risk-free interest rate (annualised)        | 0.05 (= 5%)    |
+| sigma  | volatility of the underlying (annualised)   | 0.20 (= 20%)   |
+| C      | call option price: right to buy at K        | computed       |
+| P      | put option price: right to sell at K        | computed       |
 
 Call and put prices for an at-the-money option, verified via put-call
 parity:

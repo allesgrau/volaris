@@ -13,11 +13,13 @@ Available as:
 - **R package** – `Volaris` (`R/Volaris/`)
 
 Rendered example notebooks are available on the [project
-site](https://allesgrau.github.io/volaris/): - **Python** –
-Black-Scholes, implied volatility, Monte Carlo pricing – [Examples
-(Python)](https://allesgrau.github.io/volaris/articles/notebooks_py.html) -
-**R** – Black-Scholes pricing – [Examples
-(R)](https://allesgrau.github.io/volaris/articles/notebooks_r.html)
+site](https://allesgrau.github.io/volaris/):
+
+- **Python** – Black-Scholes, implied volatility, Monte Carlo pricing –
+  [Examples
+  (Python)](https://allesgrau.github.io/volaris/articles/notebooks_py.html)
+- **R** – Black-Scholes pricing – [Examples
+  (R)](https://allesgrau.github.io/volaris/articles/notebooks_r.html)
 
 Source notebooks live in
 [`notebooks/`](https://allesgrau.github.io/volaris/notebooks/)
