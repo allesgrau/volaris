@@ -1,6 +1,7 @@
 # Implied volatility surface & volatility calculation
 
 This notebook demonstrates a selection of capabilities of the **Volaris** library through:
+
 - finding the implied volatility smile and surface via Black-Scholes model inversion
 - volatility calculation: Close-to-Close, Parkinson, Garman-Klass, Yang-Zhang estimators
 - comparison of estimator efficiency on simulated OHLC data

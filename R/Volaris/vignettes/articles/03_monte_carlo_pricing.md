@@ -1,6 +1,7 @@
 # Monte Carlo pricing & stochastic simulations
 
 This notebook demonstrates a selection of capabilities of the **Volaris** library:
+
 - European, Asian, and barrier option pricing via Monte Carlo simulation
 - GBM path simulation with antithetic variates for variance reduction
 - Merton jump-diffusion model (GBM + compound Poisson jumps)
@@ -153,6 +154,7 @@ plt.show()
 The Merton model extends GBM by adding compound Poisson jumps: sudden large moves that GBM cannot capture.
 
 Parameters:
+
 | Symbol | Meaning |
 |--------|---------|
 | lambda | expected number of jumps per year |
