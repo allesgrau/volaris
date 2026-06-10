@@ -12,7 +12,7 @@ Rendered example notebooks are available on the [project site](https://allesgrau
 
 Source notebooks live in [`notebooks/`](notebooks/) (`*.ipynb` for Python, `*_r.ipynb` for R).
 
-[Features](#features) | [Repository structure](#repository-structure) | [Dependencies](#dependencies) | [Benchmarks](#benchmarks) | [Installation](#installation) – [Python](#python) and [R](#r) | [License](#license)
+[Features](#features) | [Repository structure](#repository-structure) | [Dependencies](#dependencies) | [Benchmarks](#benchmarks) | [Installation](#installation) – [Python](#python) and [R](#r) | [Bibliography](#bibliography) | [License](#license)
 
 ## Features
 
@@ -225,6 +225,39 @@ R CMD INSTALL R\Volaris
 library(Volaris)
 bs_price(100, 100, 1.0, 0.05, 0.2, 1L)  # ~10.45
 ```
+
+## Bibliography
+
+**Tools, libraries & packages**
+
+| Tool | Used for |
+|---|---|
+| [GNU GSL](https://www.gnu.org/software/gsl/) | Numerical integration |
+| [OpenMP](https://www.openmp.org/) | Parallel streams in Monte Carlo and GARCH |
+| [Cython](https://cython.org/) | Python bindings to the C/C++ backend |
+| [NumPy](https://numpy.org/) | Array interface (Python) |
+| [Rcpp](https://www.rcpp.org/) | R bindings to the C++ backend |
+| [pytest](https://docs.pytest.org/) | Python unit-tests |
+| [testthat](https://testthat.r-lib.org/) | R unit-tests |
+| [roxygen2](https://roxygen2.r-lib.org/) | R documentation generation |
+| [pkgdown](https://pkgdown.r-lib.org/) | Package website |
+| [Jupyter](https://jupyter.org/) | Example notebooks |
+
+**Mathematical models & algorithms**
+
+Sources other than Wikipedia pages:
+- https://www.gnu.org/software/gsl/doc/html/integration.html
+- https://www.macroption.com/
+- Fabrice D. Rouah, *The Heston Model and Its Extensions in Matlab and C#*, Wiley
+- https://www.quantstart.com/
+- Bing Wang, Ling Wang *Pricing Barrier Options using Monte Carlo Methods*, Uppsala University, May 2011
+- https://medium.com/@poyuan1004/merton-jump-diffusion-model-929bf1d833ed
+- https://medium.com/hypervolatility/extracting-implied-volatility-newton-raphson-secant-and-bisection-approaches-fae83c779e56
+- https://github.com/cantaro86/Financial-Models-Numerical-Methods
+- https://github.com/numpy/numpy/blob/main/numpy/random/src/pcg64/pcg64.h
+- https://portfolioslab.com/
+- https://www.ivolatility.com/education/
+- https://www.codearmo.com/blog/
 
 ## License
 
