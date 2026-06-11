@@ -12,7 +12,7 @@ Rendered example notebooks are available on the [project site](https://allesgrau
 - **Python** – Black-Scholes, implied volatility, Monte Carlo pricing – [Examples (Python)](https://allesgrau.github.io/volaris/articles/notebooks_py.html)
 - **R** – Black-Scholes pricing – [Examples (R)](https://allesgrau.github.io/volaris/articles/notebooks_r.html)
 
-Source notebooks live in [`notebooks/`](notebooks/) (`*.ipynb` for Python, `*_r.ipynb` for R).
+Source notebooks live in [`notebooks/`]([notebooks/](https://github.com/allesgrau/volaris/tree/main/notebooks)) (`*.ipynb` for Python, `*_r.ipynb` for R).
 
 ---
 
@@ -78,7 +78,7 @@ volaris/
 
 **C/C++ backend (required for both packages)**
 
-- [GNU GSL](https://www.gnu.org/software/gsl/) >= 2.0: numerical integration
+- GNU GSL >= 2.0: numerical integration
 - OpenMP: parallelism in Monte Carlo and GARCH
 
 **Python**
@@ -90,7 +90,7 @@ volaris/
 **R**
 
 - R >= 4.0.0
-- Rcpp
+- `Rcpp`
 
 **Testing (optional)**
 
@@ -130,6 +130,44 @@ Benchmarked on Windows 11, Python 3.12, NumPy 2.x, and R 4.5.0.
 | `integrate_gauss` x 10,000 calls | 63.8 ms | 215.2 ms | **3.4x** |
 
 *The benchmark covers only a selection of the most important functionalities of Volaris.*
+
+---
+
+## Bibliography
+
+**Tools, libraries & packages**
+
+| Tool | Used for |
+|---|---|
+| [GNU GSL](https://www.gnu.org/software/gsl/) | Numerical integration |
+| [OpenMP](https://www.openmp.org/) | Parallel streams in Monte Carlo and GARCH |
+| [Cython](https://cython.org/) | Python bindings to the C/C++ backend |
+| [NumPy](https://numpy.org/) | Array interface (Python) |
+| [Rcpp](https://www.rcpp.org/) | R bindings to the C++ backend |
+| [pytest](https://docs.pytest.org/) | Python unit-tests |
+| [testthat](https://testthat.r-lib.org/) | R unit-tests |
+| [roxygen2](https://roxygen2.r-lib.org/) | R documentation generation |
+| [pkgdown](https://pkgdown.r-lib.org/) | Package website |
+| [Jupyter](https://jupyter.org/) | Example notebooks |
+
+**Mathematical models & algorithms**
+
+Sources other than Wikipedia pages and documentation of the aforementioned packages & libraries:
+- Fabrice D. Rouah, *The Heston Model and Its Extensions in Matlab and C#*, Wiley
+- Steven L. Heston, *A Closed-Form Solution for Options with Stochastic Volatility with Applications to Bond and Currency Options*, The Review of Financial Studies, 1993
+- Bing Wang, Ling Wang *Pricing Barrier Options using Monte Carlo Methods*, Uppsala University, May 2011
+- Kazuhisa Matsuda, *Introduction to Merton Jump Diffusion Model*, The City University of New York, December 2004
+- Donald E. Knuth, *The Art of Computer Programming. Volume 2, Seminumerical Algorithms*, Wesley, September 1997
+- https://www.macroption.com/
+- https://www.quantstart.com/
+- https://portfolioslab.com/
+- https://www.ivolatility.com/education/
+- https://www.codearmo.com/blog/
+- https://medium.com/@poyuan1004/merton-jump-diffusion-model-929bf1d833ed
+- https://medium.com/hypervolatility/extracting-implied-volatility-newton-raphson-secant-and-bisection-approaches-fae83c779e56
+- https://medium.com/@nikita117/why-hashing-is-o-1-on-paper-but-not-always-in-practice-83a6bba1db2e
+- https://github.com/cantaro86/Financial-Models-Numerical-Methods
+- https://github.com/numpy/numpy/blob/main/numpy/random/src/pcg64/pcg64.h
 
 ---
 

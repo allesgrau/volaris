@@ -1,7 +1,7 @@
 [project]
 name = "volaris"
 description = "Fast derivatives pricing, volatility estimation, stochastic simulation, and numerical computation through a compiled C/C++ backend."
-version = "1.0.2"
+version = "1.0.5"
 authors = [{ name="Barbara Gawlik", email="basia.m.gawlik@gmail.com" }]
 license = {text = "MIT"}
 requires-python = ">=3.9"
