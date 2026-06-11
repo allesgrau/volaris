@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">Volaris</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +82,7 @@
 <strong>R</strong> – Black-Scholes pricing – <a href="https://allesgrau.github.io/volaris/articles/notebooks_r.html">Examples (R)</a>
 </li>
 </ul>
-<p>Source notebooks live in <a href="notebooks/"><code>notebooks/</code></a> (<code>*.ipynb</code> for Python, <code>*_r.ipynb</code> for R).</p>
+<p>Source notebooks live in <a href="%5Bnotebooks/%5D(https://github.com/allesgrau/volaris/tree/main/notebooks)" class="external-link"><code>notebooks/</code></a> (<code>*.ipynb</code> for Python, <code>*_r.ipynb</code> for R).</p>
 <hr>
 <div class="section level2">
 <h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
@@ -159,8 +159,7 @@
 </h2>
 <p><strong>C/C++ backend (required for both packages)</strong></p>
 <ul>
-<li>
-<a href="https://www.gnu.org/software/gsl/" class="external-link">GNU GSL</a> &gt;= 2.0: numerical integration</li>
+<li>GNU GSL &gt;= 2.0: numerical integration</li>
 <li>OpenMP: parallelism in Monte Carlo and GARCH</li>
 </ul>
 <p><strong>Python</strong></p>
@@ -173,7 +172,7 @@
 <p><strong>R</strong></p>
 <ul>
 <li>R &gt;= 4.0.0</li>
-<li>Rcpp</li>
+<li><code>Rcpp</code></li>
 </ul>
 <p><strong>Testing (optional)</strong></p>
 <ul>
@@ -335,6 +334,66 @@
 </tbody>
 </table>
 <p><em>The benchmark covers only a selection of the most important functionalities of Volaris.</em></p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="bibliography">Bibliography<a class="anchor" aria-label="anchor" href="#bibliography"></a>
+</h2>
+<p><strong>Tools, libraries &amp; packages</strong></p>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Tool</th>
+<th>Used for</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><a href="https://www.gnu.org/software/gsl/" class="external-link">GNU GSL</a></td>
+<td>Numerical integration</td>
+</tr>
+<tr>
+<td><a href="https://www.openmp.org/" class="external-link">OpenMP</a></td>
+<td>Parallel streams in Monte Carlo and GARCH</td>
+</tr>
+<tr>
+<td><a href="https://cython.org/" class="external-link">Cython</a></td>
+<td>Python bindings to the C/C++ backend</td>
+</tr>
+<tr>
+<td><a href="https://numpy.org/" class="external-link">NumPy</a></td>
+<td>Array interface (Python)</td>
+</tr>
+<tr>
+<td><a href="https://www.rcpp.org/" class="external-link">Rcpp</a></td>
+<td>R bindings to the C++ backend</td>
+</tr>
+<tr>
+<td><a href="https://docs.pytest.org/" class="external-link">pytest</a></td>
+<td>Python unit-tests</td>
+</tr>
+<tr>
+<td><a href="https://testthat.r-lib.org/" class="external-link">testthat</a></td>
+<td>R unit-tests</td>
+</tr>
+<tr>
+<td><a href="https://roxygen2.r-lib.org/" class="external-link">roxygen2</a></td>
+<td>R documentation generation</td>
+</tr>
+<tr>
+<td><a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a></td>
+<td>Package website</td>
+</tr>
+<tr>
+<td><a href="https://jupyter.org/" class="external-link">Jupyter</a></td>
+<td>Example notebooks</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mathematical models &amp; algorithms</strong></p>
+<p>Sources other than Wikipedia pages and documentation of the aforementioned packages &amp; libraries: - Fabrice D. Rouah, <em>The Heston Model and Its Extensions in Matlab and C#</em>, Wiley - Steven L. Heston, <em>A Closed-Form Solution for Options with Stochastic Volatility with Applications to Bond and Currency Options</em>, The Review of Financial Studies, 1993 - Bing Wang, Ling Wang <em>Pricing Barrier Options using Monte Carlo Methods</em>, Uppsala University, May 2011 - Kazuhisa Matsuda, <em>Introduction to Merton Jump Diffusion Model</em>, The City University of New York, December 2004 - Donald E. Knuth, <em>The Art of Computer Programming. Volume 2, Seminumerical Algorithms</em>, Wesley, September 1997 - <a href="https://www.macroption.com/" class="external-link uri">https://www.macroption.com/</a> - <a href="https://www.quantstart.com/" class="external-link uri">https://www.quantstart.com/</a> - <a href="https://portfolioslab.com/" class="external-link uri">https://portfolioslab.com/</a> - <a href="https://www.ivolatility.com/education/" class="external-link uri">https://www.ivolatility.com/education/</a> - <a href="https://www.codearmo.com/blog/" class="external-link uri">https://www.codearmo.com/blog/</a> - <a href="https://medium.com/@poyuan1004/merton-jump-diffusion-model-929bf1d833ed" class="external-link uri">https://medium.com/@poyuan1004/merton-jump-diffusion-model-929bf1d833ed</a> - <a href="https://medium.com/hypervolatility/extracting-implied-volatility-newton-raphson-secant-and-bisection-approaches-fae83c779e56" class="external-link uri">https://medium.com/hypervolatility/extracting-implied-volatility-newton-raphson-secant-and-bisection-approaches-fae83c779e56</a> - <a href="https://medium.com/@nikita117/why-hashing-is-o-1-on-paper-but-not-always-in-practice-83a6bba1db2e" class="external-link uri">https://medium.com/@nikita117/why-hashing-is-o-1-on-paper-but-not-always-in-practice-83a6bba1db2e</a> - <a href="https://github.com/cantaro86/Financial-Models-Numerical-Methods" class="external-link uri">https://github.com/cantaro86/Financial-Models-Numerical-Methods</a> - <a href="https://github.com/numpy/numpy/blob/main/numpy/random/src/pcg64/pcg64.h" class="external-link uri">https://github.com/numpy/numpy/blob/main/numpy/random/src/pcg64/pcg64.h</a></p>
 <hr>
 </div>
 <div class="section level2">
